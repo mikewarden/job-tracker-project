@@ -15,7 +15,7 @@ class Post extends React.Component {
 
 	render() { 
 	    return (
-	      <li key={this.date}>
+	      <li key={this.date} className="post">
 		      <details>
 			      	<summary>{this.state.compName}</summary>
 			      	<p>address, contact, etc.</p>
