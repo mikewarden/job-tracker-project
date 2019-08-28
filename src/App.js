@@ -1,4 +1,5 @@
 import React from 'react';
+import Form from './Form.js';
 import './App.css';
 
 class Post extends React.Component {
