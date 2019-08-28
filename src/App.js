@@ -6,6 +6,7 @@ class Post extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+      postings: [],
 			compName : "Company Name Here",
     		posTitle : "Position Title Here",
     		date     : this.props.date
