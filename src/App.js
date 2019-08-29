@@ -118,7 +118,7 @@ class JobTracker extends React.Component {
 
   addPost = (company, position) => {
     const newPost = {
-      //id: , 
+      id: Date(), 
       filter: false,
       postType: "ideas",
       compName: company,
