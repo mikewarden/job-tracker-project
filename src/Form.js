@@ -14,7 +14,7 @@ class Form extends React.Component {
 
 	onSubmit = (event) => {
 		event.preventDefault();
-		this.props.addPost(this.state.position, this.state.company);
+		this.props.addPost(this.state);
 	    
 		this.setState({
 			company: "",
