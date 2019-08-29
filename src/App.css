@@ -1,0 +1,8 @@
+
+.post {
+	list-style-type : none;
+    border: bisque 5px;
+    border-style: double solid outset;
+    border-radius: 15vw;
+    text-align: center;
+}
