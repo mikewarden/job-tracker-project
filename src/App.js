@@ -77,7 +77,7 @@ class Postings extends React.Component {
     	return ( 
         this.props.posts.map( item => (
     	      <Post key={item.id} p={item} deletePost={this.props.deletePost}/>
-         ))
+         ) )
     	)
     }
 }
@@ -116,10 +116,9 @@ class JobTracker extends React.Component {
 
 
   deletePost = (id) => {
-    console.log(id);
-      //this.props.p.map( item ) {
-
-     // }
+    this.setState({
+      postList : [...this.state.postList.filter(item => item.id !== id )]
+    });
   }
 
   // opens the form to create a new
