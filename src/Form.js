@@ -7,64 +7,30 @@ class Form extends React.Component {
 		super(props);
 		this.state = {
 			company: "",
-			position: "",
-			phone: "",
-			url: ""
+			position: ""
 		}
 	}
 
-	handleChange = (event) => {
-		this.props.onSubmit({[event.target.name]: event.target.value})
-		this.setState({[event.target.name]: event.target.value});
+	onSubmit = (event) => {
+		
 	}
 
-	onSubmit = (event) => {
-		event.preventDefault();
-		// this.props.onSubmit(this.state);
+	onChange = (event) => {
 		this.setState({
-			company: "",
-			position: "",
-			phone: "",
-			url: ""
+			[event.target.name]: event.target.value
 		});
-		// this.props.onChange({
-		// 	company: "",
-		// 	position: "",
-		// 	phone: "",
-		// 	url: ""
-		// })
 	}
 
   render() {
     return (
       <div className="Form">
         
-        <form>
-        	<input type="text"
-        	name="company" 
-        	placeholder="Company Name"
-        	value={this.state.company} 
-        	onChange={event => this.handleChange(event)} />
+        <form onSubmit={this.onSubmit}>
+        	<input type="text" name="company" placeholder="Company Name" value={this.state.company} onChange={this.onChange}/>
         	<br/>
-        	<input type="text"
-        	name="position"
-        	placeholder="Desired Position"
-        	value={this.state.position} 
-        	onChange={event => this.handleChange(event)} />
+        	<input type="text" name="position" placeholder="Desired Position" onChange={this.onChange} />
         	<br/>
-        	<input type="text" 
-        	name="phone"
-        	placeholder="Phone Number"
-        	value={this.state.phone} 
-        	onChange={event => this.handleChange(event)} />
-        	<br/>
-        	<input type="text" 
-        	name="url"
-        	placeholder="Website URL"
-        	value={this.state.url} 
-        	onChange={event => this.handleChange(event)} />
-        	<br/>
-        	<button onClick={(event) => this.onSubmit(event)}>Submit</button>
+        	<input type="submit" value="Submit" className="submit-btn" value={this.state.position}/>
 
         	
         </form>
