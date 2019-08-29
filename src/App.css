@@ -15,3 +15,38 @@
     text-align: center;
     display : none;
 }
+
+.submit-btn {
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.Form {
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  color: #fff;
+}
+
+input {
+  border-radius: 30px;
+  border: 2px solid #fff;
+  background-color: #000;
+  color: #fff;
+  padding: 6px;
+  margin-bottom: 4px;
+}
+
+body {
+  background-color: #000;
+}
+
+ul {
+  text-align: center;
+}
+
+::placeholder {
+  color: #fff;
+}
