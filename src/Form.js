@@ -58,7 +58,7 @@ class Form extends React.Component {
         	<br/>
         	<input type="text" name="zipCode" placeholder="Zip Code" value={this.state.zipCode} onChange={this.onChange} />
         	<br/>
-        	<input type="text" name="phone" placeholder="Phone Number" value={this.state.phone} onChange={this.onChange} />
+        	<input type="text" name="phone" placeholder="Phone Number" value={this.state.phone} onChange={this.onChange} required/>
         	<br/>
         	<input type="text" name="contactName" placeholder="Contact Name" value={this.state.contactName} onChange={this.onChange} />
         	<br/>
@@ -68,7 +68,7 @@ class Form extends React.Component {
         	<br/>
         	<input type="text" name="position" placeholder="Desired Position" value={this.state.position} onChange={this.onChange} />
         	<br/>
-        	<input type="text" name="website" placeholder="Website URL" value={this.state.website} onChange={this.onChange} />
+        	<input type="text" name="website" placeholder="Website URL" value={this.state.website} onChange={this.onChange} required/>
         	<br/>
         	<input type="text" name="salary" placeholder="Salary" value={this.state.salary} onChange={this.onChange} />
         	<br/>

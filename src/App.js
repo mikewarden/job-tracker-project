@@ -110,7 +110,7 @@ class Post extends React.Component {
              cNumber, cName, invwDate, pcDate, posTitle, posId, posUrl, 
              salary, posDead, date} = this.props.p;
 
-      const pStyle = { textAlign : "center"};
+      const pStyle = { textAlign : "center", margin: "0px"};
 
       const btn1Style = {
             background : "black",
@@ -257,7 +257,17 @@ class JobTracker extends React.Component {
       filter: false,
       postType: "ideas",
       compName: post.company,
+      compSA: post.street,
+      compCS: post.cityState,
+      compZip: post.zipCode,
+      cNumber: post.phone,
+      cName: post.contactName,
+      invwDate: post.interviewDate,
+      pcDate: post.phoneCallDate,
       posTitle: post.position,
+      posUrl: post.website,
+      salary: post.salary,
+      posDead: post.deadline,
       date: Date()
     }
     this.setState({
