@@ -12,7 +12,13 @@ class Form extends React.Component {
 	}
 
 	onSubmit = (event) => {
-		
+		event.preventDefault();
+		this.props.addPost(this.state.company);
+		this.props.addPost(this.state.position);
+		this.setState({
+			company: "",
+			position: ""
+		})
 	}
 
 	onChange = (event) => {
