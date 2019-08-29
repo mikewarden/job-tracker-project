@@ -118,9 +118,12 @@ class JobTracker extends React.Component {
 
   addPost = (company, position) => {
     const newPost = {
+      //id: , 
+      filter: false,
+      postType: "ideas",
       compName: company,
       posTitle: position,
-      date: this.props.date
+      date: Date()
     }
     this.setState({
       postList: [...this.state.postList, newPost ]
