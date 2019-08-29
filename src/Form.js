@@ -12,30 +12,59 @@ class Form extends React.Component {
 			url: ""
 		}
 	}
+
+	handleChange = (event) => {
+		this.props.onSubmit({[event.target.name]: event.target.value})
+		this.setState({[event.target.name]: event.target.value});
+	}
+
+	onSubmit = (event) => {
+		event.preventDefault();
+		// this.props.onSubmit(this.state);
+		this.setState({
+			company: "",
+			position: "",
+			phone: "",
+			url: ""
+		});
+		// this.props.onChange({
+		// 	company: "",
+		// 	position: "",
+		// 	phone: "",
+		// 	url: ""
+		// })
+	}
+
   render() {
     return (
       <div className="Form">
-        <h1>JobTracker</h1>
+        
         <form>
-        	<input type="text" 
+        	<input type="text"
+        	name="company" 
         	placeholder="Company Name"
         	value={this.state.company} 
-        	onChange={event => this.setState({company: event.target.value})} />
-
-        	<input type="text" 
+        	onChange={event => this.handleChange(event)} />
+        	<br/>
+        	<input type="text"
+        	name="position"
         	placeholder="Desired Position"
         	value={this.state.position} 
-        	onChange={event => this.setState({position: event.target.value})} />
-
+        	onChange={event => this.handleChange(event)} />
+        	<br/>
         	<input type="text" 
+        	name="phone"
         	placeholder="Phone Number"
         	value={this.state.phone} 
-        	onChange={event => this.setState({phone: event.target.value})} />
-
+        	onChange={event => this.handleChange(event)} />
+        	<br/>
         	<input type="text" 
+        	name="url"
         	placeholder="Website URL"
         	value={this.state.url} 
-        	onChange={event => this.setState({url: event.target.value})} />
+        	onChange={event => this.handleChange(event)} />
+        	<br/>
+        	<button onClick={(event) => this.onSubmit(event)}>Submit</button>
 
         	
         </form>

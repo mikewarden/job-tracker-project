@@ -6,15 +6,31 @@ class Post extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-      postings: [],
+      postings: {},
 			compName : "Company Name Here",
     		posTitle : "Position Title Here",
     		date     : this.props.date
 		}
 	}
 
+  onSubmit = (postings) => {
+    console.log(postings);
+    this.setState({ 
+      postings: {
+        ...this.state.postings,
+        ...postings 
+        }
+    });
+  }
+
+
 	render() { 
+    let newPost = JSON.stringify(this.state.postings, null, 2);
 	    return (
+        <div>
+        <Form onSubmit={(postings) => this.onSubmit(postings)}/>
+        <p>{newPost}</p>
+        <p>{this.state.postings.company}</p>
 	      <li key={this.date} className="post">
 		      <details>
 			      	<summary>{this.state.compName}</summary>
@@ -25,6 +41,7 @@ class Post extends React.Component {
 			      	<p>I have no idea</p>
 		      </details>
 	      </li>
+        </div>
 	    	);
     }
 }
@@ -63,9 +80,9 @@ class JobTracker extends React.Component {
 
   // opens the form to create a new
   // posting
-  handleClick = (event) => {
-  	console.log("trigger");
-  }
+  // handleClick = (event) => {
+  // 	console.log("trigger");
+  // }
 
   render() {
     return (
