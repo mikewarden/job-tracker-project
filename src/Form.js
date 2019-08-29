@@ -11,22 +11,13 @@ class Form extends React.Component {
 		}
 	}
 
-	onSubmit = (event) => {
-		event.preventDefault();
-		this.props.addPost(this.state.company);
-		this.props.addPost(this.state.position);
-		// this.props.addPost(this.state);
-		this.setState({
-			company: "",
-			position: ""
-		})
-	}
 
 	onSubmit = (event) => {
 		event.preventDefault();
-		this.props.addPost(this.state.position);
-		// this.props.addPost(this.state);
+		this.props.addPost(this.state.position, this.state.companyd);
+	    
 		this.setState({
+			company: "",
 			position: ""
 		})
 	}
@@ -35,7 +26,9 @@ class Form extends React.Component {
 	onChange = (event) => {
 		this.setState({
 			[event.target.name]: event.target.value
+
 		});
+		console.log(event.target.name);
 	}
 
   render() {

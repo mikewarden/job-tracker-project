@@ -3,25 +3,7 @@ import Form from './Form.js';
 import './App.css';
 
 class Post extends React.Component {
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state = {
- //   //    postings: {},
-			// compName : "Company Name Here",
-   //  		posTitle : "Position Title Here",
-   //  		date     : this.props.date
-	// 	}
-	// }
-
-  // onSubmit = (postings) => {
-  //   console.log(postings);
-  //   this.setState({ 
-  //     postings: {
-  //       ...this.state.postings,
-  //       posting 
-  //       }
-  //   });
-  // }
+	
 
    // dynamic style!
    listStyle = () => {
@@ -56,10 +38,6 @@ class Post extends React.Component {
                 float  : "left"
       };
 
-//    let newPost = JSON.stringify(this.state.postings, null, 2);
-//        <Form onSubmit={(postings) => this.onSubmit(postings)}/>
-//        <p>{newPost}</p>
-//        <p>{this.state.postings.company}</p>
 	    return (
         <div>
 	      <li className={ filter ? "nopost" : "post"} style={this.listStyle()}>
@@ -137,7 +115,7 @@ class JobTracker extends React.Component {
     });
   }
 
-<<<<<<< HEAD
+
   addPost = (company, position) => {
     const newPost = {
       compName: company,
@@ -148,7 +126,7 @@ class JobTracker extends React.Component {
       postList: [...this.state.postList, newPost ]
     })
     console.log(newPost);
-=======
+}
   filterPost = (type) => {
     console.log("type is: " + type);
     let posts = this.state.postList.slice();
@@ -161,7 +139,6 @@ class JobTracker extends React.Component {
       postList : posts
     })
 
->>>>>>> d62bacfe4379eea6b188569e68aa9ee77793e187
   }
 
   // opens the form to create a new
