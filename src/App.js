@@ -6,38 +6,47 @@ class Post extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-      postings: {},
-			compName : "Company Name Here",
-    		posTitle : "Position Title Here",
-    		date     : this.props.date
+   //    postings: {},
+			// compName : "Company Name Here",
+   //  		posTitle : "Position Title Here",
+   //  		date     : this.props.date
 		}
 	}
 
-  onSubmit = (postings) => {
-    console.log(postings);
-    this.setState({ 
-      postings: {
-        ...this.state.postings,
-        ...postings 
-        }
-    });
-  }
+  // onSubmit = (postings) => {
+  //   console.log(postings);
+  //   this.setState({ 
+  //     postings: {
+  //       ...this.state.postings,
+  //       posting 
+  //       }
+  //   });
+  // }
 
 
 	render() { 
-    let newPost = JSON.stringify(this.state.postings, null, 2);
+
+     const listStyle = {
+        listStyleType : "none",
+        border: "bisque 5px",
+        borderStyle: "double solid outset",
+        borderRadius: "15vw",
+        textAlign: "center"
+     };
+
+//    let newPost = JSON.stringify(this.state.postings, null, 2);
+//        <Form onSubmit={(postings) => this.onSubmit(postings)}/>
+//        <p>{newPost}</p>
+//        <p>{this.state.postings.company}</p>
 	    return (
         <div>
-        <Form onSubmit={(postings) => this.onSubmit(postings)}/>
-        <p>{newPost}</p>
-        <p>{this.state.postings.company}</p>
-	      <li key={this.date} className="post">
+	      <li className="post" style={listStyle}>
 		      <details>
-			      	<summary>{this.state.compName}</summary>
+			      	<summary>{this.props.p.compName}</summary>
 			      	<p>address, contact, etc.</p>
 		      </details>
 		      <details>
-			      	<summary>{this.state.posTitle}</summary>
+			      	<summary>{this.props.p.posTitle}</summary>
 			      	<p>I have no idea</p>
 		      </details>
 	      </li>
@@ -52,13 +61,14 @@ class Postings extends React.Component {
     	super(props);
 
     	this.state = {
-    		posts : []
     	}
     }
 
     render() {
     	return ( 
-    	   <Post date={new Date()}/>
+        this.props.posts.map( item => (
+    	      <Post key={item.id} p={item}/>
+         ))
     	)
     }
 }
@@ -72,8 +82,20 @@ class JobTracker extends React.Component {
   	super(props);
 
   	this.state = {
-        postType  : "ideas",
-             date : null
+        postList : [{
+            id       : 0,
+            postType : "ideas",
+            compName : "Company Name Here",
+            posTitle : "Position Title Here",
+            date     : this.props.date
+        },{
+            id       : 1,
+            postType : "ideas",
+            compName : "Company Name Here",
+            posTitle : "Position Title Here",
+            date     : this.props.date
+        }
+        ]
   	}
   }
 
@@ -89,7 +111,7 @@ class JobTracker extends React.Component {
       <div className="JobTracker">
         <h1>Job Tracker</h1>
         <ul className="Postings">
-        <Postings action="add"/>
+        <Postings posts={this.state.postList}/>
         </ul>
         <button onClick={this.handleClick} >+</button>
       </div>
