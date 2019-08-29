@@ -76,7 +76,7 @@ class Postings extends React.Component {
     render() {
     	return ( 
         this.props.posts.map( item => (
-    	      <Post key={item.id} p={item} deletePost={this.props.deletePost}/>
+    	      <Post key={item.id} p={item} deletePost={this.props.deletePost} addPost={this.props.addPost}/>
          ) )
     	)
     }
@@ -111,6 +111,7 @@ class JobTracker extends React.Component {
             date     : this.props.date
         }
         ]
+
   	}
   }
 
@@ -119,6 +120,18 @@ class JobTracker extends React.Component {
     this.setState({
       postList : [...this.state.postList.filter(item => item.id !== id )]
     });
+  }
+
+  addPost = (company, position) => {
+    const newPost = {
+      compName: company,
+      posTitle: position,
+      date: this.props.date
+    }
+    this.setState({
+      postList: [...this.state.postList, newPost ]
+    })
+    console.log(newPost);
   }
 
   // opens the form to create a new
