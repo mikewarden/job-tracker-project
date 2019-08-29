@@ -34,11 +34,11 @@ class Post extends React.Component {
       } else if (this.props.p.postType === "contacted")
           return { backgroundColor : "green" };
    };
-
+  
 	render() { 
-      const {id, compName, posTitle, date} = this.props.p;
+      const {id, filter, postType, compName, posTitle, date} = this.props.p;
 
-      const btnStyle = {
+      const btn1Style = {
             background : "black",
                  color : "white",
                padding : "5px",
@@ -47,14 +47,24 @@ class Post extends React.Component {
                 float  : "right"
       };
 
+      const btn2Style = {
+            background : "black",
+                 color : "white",
+               padding : "5px",
+          borderRadius : "10px",
+                cursor : "pointer",
+                float  : "left"
+      };
+
 //    let newPost = JSON.stringify(this.state.postings, null, 2);
 //        <Form onSubmit={(postings) => this.onSubmit(postings)}/>
 //        <p>{newPost}</p>
 //        <p>{this.state.postings.company}</p>
 	    return (
         <div>
-	      <li className="post" style={this.listStyle()}>
-          <button onClick={this.props.deletePost.bind(this, id)} style={btnStyle}>X</button>
+	      <li className={ filter ? "nopost" : "post"} style={this.listStyle()}>
+          <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
+          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}>F</button>
 		      <details>
 			      	<summary>{compName}</summary>
 			      	<p>address, contact, etc.</p>
@@ -76,7 +86,7 @@ class Postings extends React.Component {
     render() {
     	return ( 
         this.props.posts.map( item => (
-    	      <Post key={item.id} p={item} deletePost={this.props.deletePost}/>
+    	      <Post key={item.id} p={item} deletePost={this.props.deletePost} filterPost={this.props.filterPost}/>
          ) )
     	)
     }
@@ -93,22 +103,25 @@ class JobTracker extends React.Component {
   	this.state = {
         postList : [{
             id       : 0,
+            filter   : false,
             postType : "ideas",
             compName : "Company Name Here",
             posTitle : "Position Title Here",
-            date     : this.props.date
+            date     : Date()
         },{
             id       : 1,
+            filter   : false,
             postType : "applied",
             compName : "Company Name Here",
             posTitle : "Position Title Here",
-            date     : this.props.date
+            date     : Date()
         },{
             id       : 2,
+            filter   : false,
             postType : "contacted",
             compName : "Company Name Here",
             posTitle : "Position Title Here",
-            date     : this.props.date
+            date     : Date()
         }
         ]
   	}
@@ -121,19 +134,34 @@ class JobTracker extends React.Component {
     });
   }
 
+  filterPost = (type) => {
+    console.log("type is: " + type);
+    let posts = this.state.postList.slice();
+    posts.forEach( item => {
+        if (item.postType !== type ) {
+           item.filter = !item.filter;
+        }
+    })
+    this.setState({
+      postList : posts
+    })
+
+  }
+
   // opens the form to create a new
   // posting
   // handleClick = (event) => {
   // 	console.log("trigger");
   // }
-
   render() {
     return (
       <div className="JobTracker">
         <h1>Job Tracker</h1>
-        <Form />
+       <Form />
+
         <ul className="Postings">
-        <Postings posts={this.state.postList} deletePost={this.deletePost}/>
+        <Postings posts={this.state.postList} deletePost={this.deletePost}
+                                              filterPost={this.filterPost}/>
         </ul>
         <button onClick={this.handleClick} >+</button>
       </div>

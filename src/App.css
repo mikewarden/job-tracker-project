@@ -6,3 +6,12 @@
     border-radius: 15vw;
     text-align: center;
 }
+
+.nopost {
+	list-style-type : none;
+    border: bisque 5px;
+    border-style: double solid outset;
+    border-radius: 15vw;
+    text-align: center;
+    display : none;
+}
