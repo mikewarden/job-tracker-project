@@ -86,7 +86,18 @@ class JobTracker extends React.Component {
             filter   : false,
             postType : "ideas",
             compName : "Company Name Here",
+            compSA   : "123 Main St.",
+            compCS   : "Dallas, Texas",
+            compZip  : 75229,
+            CNumber  : "480-294-0824",
+            CName    : "Melissa Stines",
+            InvwDate : "12/12/2019",
+            PCDate   : "01/13/2020",
             posTitle : "Position Title Here",
+            posId    : "#2346A876",
+            posUrl   : "google.com",
+            salary   : "$100k",
+            posDead  : Date("12/14/2015"),
             date     : Date()
         },{
             id       : 1,
