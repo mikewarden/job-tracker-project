@@ -131,7 +131,7 @@ class JobTracker extends React.Component {
     return (
       <div className="JobTracker">
         <h1>Job Tracker</h1>
-        <Form />
+        <Form addPost={this.addPost}/>
         <ul className="Postings">
         <Postings posts={this.state.postList} deletePost={this.deletePost}/>
         </ul>
