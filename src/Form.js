@@ -46,6 +46,7 @@ class Form extends React.Component {
 		});
 	}
 
+    // date is expected in the following format: 'Thu, 01 Jan 1970 00:00:00'
   	render() {
     return (
       <div className="Form">

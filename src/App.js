@@ -1,4 +1,7 @@
 import React from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+
 import Form from './Form.js';
 import './App.css';
 
@@ -130,7 +133,7 @@ class Post extends React.Component {
           borderRadius : "20px",
                 cursor : "pointer",
                 float  : "right",
-                padding: "8px 10px"
+               padding : "8px 10px"
       };
 
       const btn2Style = {
@@ -140,13 +143,24 @@ class Post extends React.Component {
           borderRadius : "20px",
                 cursor : "pointer",
                 float  : "left",
-                padding: "8px 10px"
+               padding : "8px 10px"
+      };
+
+      const btn3Style = {
+            background : "black",
+                 color : "white",
+               padding : "5px",
+          borderRadius : "20px",
+                cursor : "pointer",
+                float  : "left",
+               padding : "8px 10px"
       };
 
 
 	    return (
         <div>
 	      <li className={ filter ? "nopost" : "post"} style={this.listStyle()}>
+          <button onClick={this.props.modifyPost.bind(this, this.props.p)} style={btn3Style}>M</button>
           <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
           <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}>F</button>
 		      <details>
@@ -181,7 +195,9 @@ class Postings extends React.Component {
     	return ( 
         this.props.posts.map( item => (
 
-    	      <Post key={item.id} p={item} deletePost={this.props.deletePost} filterPost={this.props.filterPost}/>
+    	      <Post key={item.id} p={item} deletePost={this.props.deletePost} 
+                                         filterPost={this.props.filterPost} 
+                                         modifyPost={this.props.modifyPost}/>
 
          ) )
     	)
@@ -267,8 +283,9 @@ class JobTracker extends React.Component {
 
 
   addPost = (post) => {
+    let now = new Date();
     const newPost = {
-      id: Date(), 
+      id: now, 
       filter: false,
       postType: "ideas",
       compName: post.company,
@@ -277,19 +294,24 @@ class JobTracker extends React.Component {
       compZip: post.zipCode,
       cNumber: post.phone,
       cName: post.contactName,
-      invwDate: post.interviewDate,
-      pcDate: post.phoneCallDate,
+      invwDate: Date.parse(post.interviewDate),
+      pcDate: Date.parse(post.phoneCallDate),
       posTitle: post.position,
       posUrl: post.website,
       salary: post.salary,
       posDead: post.deadline,
-      date: Date()
+      date: now
     }
     this.setState({
       postList: [...this.state.postList, newPost ]
     })
     console.log(newPost);
 }
+
+modifyPost = (item) => {
+    console.log("an item: " + item);
+}
+
   filterPost = (type) => {
     console.log("type is: " + type);
     let posts = this.state.postList.slice();
@@ -304,22 +326,35 @@ class JobTracker extends React.Component {
 
   }
 
-  // opens the form to create a new
-  // posting
-  // handleClick = (event) => {
-  // 	console.log("trigger");
-  // }
   render() {
+    const linkStyle = {
+          margin : "45%",
+
+         // display : "block"
+    };
+
     return (
-      <div className="JobTracker">
-        <h1>Job Tracker</h1>
-        <Form addPost={this.addPost}/>
-        <ul className="Postings">
-        <Postings posts={this.state.postList} deletePost={this.deletePost}
-                                              filterPost={this.filterPost}/>
-        </ul>
-        <button onClick={this.handleClick} >+</button>
-      </div>
+      <Router>
+        <div className="JobTracker">
+          <header>
+            <h1>Job Tracker</h1>
+            <Link style={linkStyle} to="/">Home</Link> | 
+            <Link style={linkStyle} to="/form">Add Posting</Link>
+          </header>
+          <Route exact path="/" render={ props => (
+            <React.Fragment>
+              <ul className="Postings">
+              <Postings posts={this.state.postList} deletePost={this.deletePost}
+                                                    filterPost={this.filterPost}
+                                                    modifyPost={this.modifyPost}/>
+              </ul>
+            </React.Fragment>
+            )} />
+          <Route path="/form" render={ props => (
+            <Form addPost={this.addPost} editPost={this.editedPost}/>
+            )} />
+        </div>
+      </Router>
     );
   }
 }
