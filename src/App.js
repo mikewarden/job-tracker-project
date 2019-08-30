@@ -104,6 +104,17 @@ class Post extends React.Component {
           return { backgroundColor : "green" };
    };
   
+  getDateString = (date) => {
+    let now = Date.now();
+    let diff = Math.floor((now - date) / (1000*60*60*24));  // ms - sec - min - hours - days
+    if (diff.isNaN) {
+        return "unknown date";
+    } else {
+        return (`${diff} days ago`); 
+    }
+    
+  }
+
 	render() { 
 
       const {id, filter, postType, compName, compSA, compCS, compZip, 
@@ -146,6 +157,7 @@ class Post extends React.Component {
               {this.interviewDate(invwDate, pStyle)}
               {this.phoneCallDate(pcDate, pStyle)}
 		      </details>
+          <hr width="10%"/>
 		      <details>
 			      	<summary>{posTitle}</summary>
               {this.positionId(posId, pStyle)}
@@ -153,7 +165,7 @@ class Post extends React.Component {
               {this.positionSalary(salary, pStyle)}
               {this.positionDeadline(posDead, pStyle)}
 		      </details>
-          <p>{date}</p>
+          <p>{this.getDateString(date)}</p>
 	      </li>
         </div>
 	    	);
@@ -182,6 +194,7 @@ class JobTracker extends React.Component {
   constructor(props) {
   	super(props);
 
+    // date is expected in the following format: 'Thu, 01 Jan 1970 00:00:00'
   	this.state = {
         postList : [{
             id       : 0,
@@ -199,8 +212,8 @@ class JobTracker extends React.Component {
             posId    : "#2346A876",
             posUrl   : "google.com",
             salary   : "$100k",
-            posDead  : Date("12/14/2015"),
-            date     : Date()
+            posDead  : Date.parse('Jan 31, 2020 23:15:30'),
+            date     : Date.parse('Aug 18, 2019 13:15:30')
         },{
             id       : 1,
             filter   : false,
@@ -217,8 +230,8 @@ class JobTracker extends React.Component {
             posId    : "#2346A876",
             posUrl   : "google.com",
             salary   : "$100k",
-            posDead  : Date("12/14/2015"),
-            date     : Date()
+            posDead  : Date.parse('Dec 19, 2019 23:15:30'),
+            date     : Date.parse('Aug 23, 2019 13:15:30')
         },{
             id       : 2,
             filter   : false,
@@ -235,8 +248,8 @@ class JobTracker extends React.Component {
             posId    : "#2346A876",
             posUrl   : "google.com",
             salary   : "$100k",
-            posDead  : Date("12/14/2015"),
-            date     : Date()
+            posDead  : Date.parse('May 1, 2020 23:15:30'),
+            date     : Date.parse('Aug 23, 2018 13:15:30')
         }
         ]
 
