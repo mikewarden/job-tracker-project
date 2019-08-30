@@ -5,8 +5,16 @@ import {Link} from 'react-router-dom';
 import Form from './Form.js';
 import ModForm from './ModForm.js';
 import './App.css';
+import edit from './edit-icon.svg';
+import lightbulbIcon from './lightbulb1.svg';
+import phoneIcon from './phone1.svg';
+import starIcon from './star1.svg';
 
 class Post extends React.Component {
+
+
+
+
     
     streetAddress = (addr, pStyle) => {
       if (addr) {
@@ -95,7 +103,7 @@ class Post extends React.Component {
         return <p style={{display : "none"}}></p>
       }
     }
-
+   
    // dynamic style!
    listStyle = () => {
       if (this.props.p.postType === "ideas") {
@@ -107,6 +115,19 @@ class Post extends React.Component {
       } else if (this.props.p.postType === "contacted")
           return { backgroundColor : "#0BFF0A" };
    };
+
+     filterIcon = () => {
+      if (this.props.p.postType === "ideas") {
+          return lightbulbIcon;
+
+      } else if (this.props.p.postType === "applied") {
+          return phoneIcon;
+
+      } else if (this.props.p.postType === "contacted")
+          return starIcon;
+   };
+
+
   
   getDateString = (date) => {
     let now = Date.now();
@@ -119,6 +140,8 @@ class Post extends React.Component {
     
   }
 
+
+
 	render() { 
 
       const {id, filter, postType, compName, compSA, compCS, compZip, 
@@ -126,6 +149,10 @@ class Post extends React.Component {
              salary, posDead, date} = this.props.p;
 
       const pStyle = { textAlign : "center", margin: "0px"};
+
+
+      
+  
 
       const btn1Style = {
             background : "black",
@@ -156,14 +183,15 @@ class Post extends React.Component {
                 float  : "left",
                 padding: "8px 10px"
       };
+
       let route = this.props.routeInfo;
 
 	    return (
         <div>
 	      <li className={ filter ? "nopost" : "post"} style={this.listStyle()}>
-          <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}>M</button>
+          <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}><img src={edit} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
           <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
-          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}>F</button>
+          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.filterIcon()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
 		      <details>
 			      	<summary>{compName}</summary>
               {this.streetAddress(compSA, pStyle)}
@@ -356,7 +384,11 @@ class JobTracker extends React.Component {
 
   render() {
     const linkStyle = {
-          margin : "50%",
+          margin : "5%",
+          textDecoration: "none",
+          color: "#fff",
+          display: "inline-flex",
+          textAlign: "center"
     };
 
     return (
@@ -364,7 +396,7 @@ class JobTracker extends React.Component {
         <div className="JobTracker">
           <header>
             <h1>Job Tracker</h1>
-            <Link style={linkStyle} to="/">Home</Link> | 
+            <Link style={linkStyle} to="/">Home</Link>  
             <Link style={linkStyle} to="/form">Add Posting</Link>
           </header>
           <Route exact path="/" render={ props => (
