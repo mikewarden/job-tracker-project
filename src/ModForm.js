@@ -1,29 +1,34 @@
 import React from 'react';
 import App from './App.js';
 
-
-class Form extends React.Component {
+class ModForm extends React.Component {
 	constructor(props) {
 		super(props);
+		let posting = this.props.routeInfo.location.state.post;
 		this.state = {
-			company: "",
-			street: "",
-			cityState: "",
-			zipCode: "",
-			phone: "",
-			contactName: "",
-			interviewDate: "",
-			phoneCallDate: "",
-			position: "",
-			website: "",
-			salary: "",
-			deadline: ""
+			id           : posting.id,
+			filter       : posting.filter,
+			postType     : posting.postType,
+			company      : posting.compName,
+			street       : posting.compSA,
+			cityState    : posting.compCS,
+			zipCode      : posting.compZip,
+			phone        : posting.cNumber,
+			contactName  : posting.cName,
+			interviewDate: posting.invwDate,
+			phoneCallDate: posting.pcDate,
+			position     : posting.posTitle,
+			website      : posting.posUrl,
+			salary       : posting.salary,
+			deadline     : posting.posDead,
+			date         : posting.date
 		}
 	}
 
 	onSubmit = (event) => {
 		event.preventDefault();
-		this.props.addPost(this.state);
+		let thisPost = this.state;
+		this.props.editPost(thisPost);
 	    this.setState({
 			company: "",
 			street: "",
@@ -38,7 +43,6 @@ class Form extends React.Component {
 			salary: "",
 			deadline: ""
 		});
-		console.log(this.props);
 		this.props.routeInfo.history.push("/");
 	}
 
@@ -51,7 +55,7 @@ class Form extends React.Component {
     // date is expected in the following format: 'Thu, 01 Jan 1970 00:00:00'
   	render() {
     return (
-      <div className="Form">
+      <div className="ModForm">
         <form onSubmit={this.onSubmit} action="/">
         	<input type="text" name="company" placeholder="Company Name" value={this.state.company} onChange={this.onChange} required/>
         	<br/>
@@ -84,4 +88,5 @@ class Form extends React.Component {
   }
 }
 
-export default Form;
+
+export default ModForm;
