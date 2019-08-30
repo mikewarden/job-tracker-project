@@ -11,18 +11,9 @@ import starIcon from './star1.svg';
 
 class Post extends React.Component {
 
-  // getIcon = () => {
-  //   let currentIcon;
-  //     if (this.props.p.postType === "ideas") {
-  //         return currentIcon = lightbulbIcon;
 
-  //     } else if (this.props.p.postType === "applied") {
-  //       return currentIcon = starIcon;
 
-  //     } else if (this.props.p.postType === "contacted")
-  //       return currentIcon = phoneIcon;
-  //     }
-  // }
+
     
     streetAddress = (addr, pStyle) => {
       if (addr) {
@@ -123,6 +114,19 @@ class Post extends React.Component {
       } else if (this.props.p.postType === "contacted")
           return { backgroundColor : "#0BFF0A" };
    };
+
+     filterIcon = () => {
+      if (this.props.p.postType === "ideas") {
+          return lightbulbIcon;
+
+      } else if (this.props.p.postType === "applied") {
+          return phoneIcon;
+
+      } else if (this.props.p.postType === "contacted")
+          return starIcon;
+   };
+
+
   
   getDateString = (date) => {
     let now = Date.now();
@@ -144,6 +148,10 @@ class Post extends React.Component {
              salary, posDead, date} = this.props.p;
 
       const pStyle = { textAlign : "center", margin: "0px"};
+
+
+      
+  
 
       const btn1Style = {
             background : "black",
@@ -184,7 +192,7 @@ class Post extends React.Component {
 	      <li className={ filter ? "nopost" : "post"} style={this.listStyle()}>
           <button onClick={this.props.modifyPost.bind(this, this.props.p)} style={btn3Style}><img src={edit} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
           <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
-          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img src={lightbulbIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.filterIcon()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
 		      <details>
 			      	<summary>{compName}</summary>
               {this.streetAddress(compSA, pStyle)}
