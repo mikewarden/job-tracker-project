@@ -4,8 +4,25 @@ import {Link} from 'react-router-dom';
 
 import Form from './Form.js';
 import './App.css';
+import edit from './edit-icon.svg';
+import lightbulbIcon from './lightbulb1.svg';
+import phoneIcon from './phone1.svg';
+import starIcon from './star1.svg';
 
 class Post extends React.Component {
+
+  // getIcon = () => {
+  //   let currentIcon;
+  //     if (this.props.p.postType === "ideas") {
+  //         return currentIcon = lightbulbIcon;
+
+  //     } else if (this.props.p.postType === "applied") {
+  //       return currentIcon = starIcon;
+
+  //     } else if (this.props.p.postType === "contacted")
+  //       return currentIcon = phoneIcon;
+  //     }
+  // }
     
     streetAddress = (addr, pStyle) => {
       if (addr) {
@@ -94,7 +111,7 @@ class Post extends React.Component {
         return <p style={{display : "none"}}></p>
       }
     }
-
+   
    // dynamic style!
    listStyle = () => {
       if (this.props.p.postType === "ideas") {
@@ -117,6 +134,8 @@ class Post extends React.Component {
     }
     
   }
+
+
 
 	render() { 
 
@@ -156,13 +175,16 @@ class Post extends React.Component {
                padding : "8px 10px"
       };
 
+     
+
+
 
 	    return (
         <div>
 	      <li className={ filter ? "nopost" : "post"} style={this.listStyle()}>
-          <button onClick={this.props.modifyPost.bind(this, this.props.p)} style={btn3Style}>M</button>
+          <button onClick={this.props.modifyPost.bind(this, this.props.p)} style={btn3Style}><img src={edit} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
           <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
-          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}>F</button>
+          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img src={lightbulbIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
 		      <details>
 			      	<summary>{compName}</summary>
               {this.streetAddress(compSA, pStyle)}
