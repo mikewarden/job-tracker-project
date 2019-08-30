@@ -95,13 +95,13 @@ class Post extends React.Component {
    // dynamic style!
    listStyle = () => {
       if (this.props.p.postType === "ideas") {
-          return { backgroundColor : "red" };
+          return { backgroundColor : "#EB1200" };
 
       } else if (this.props.p.postType === "applied") {
-          return { backgroundColor : "blue" };
+          return { backgroundColor : "#0CAFE8" };
 
       } else if (this.props.p.postType === "contacted")
-          return { backgroundColor : "green" };
+          return { backgroundColor : "#0BFF0A" };
    };
   
 	render() { 
@@ -116,18 +116,20 @@ class Post extends React.Component {
             background : "black",
                  color : "white",
                padding : "5px",
-          borderRadius : "10px",
+          borderRadius : "20px",
                 cursor : "pointer",
-                float  : "right"
+                float  : "right",
+                padding: "8px 10px"
       };
 
       const btn2Style = {
             background : "black",
                  color : "white",
                padding : "5px",
-          borderRadius : "10px",
+          borderRadius : "20px",
                 cursor : "pointer",
-                float  : "left"
+                float  : "left",
+                padding: "8px 10px"
       };
 
 
