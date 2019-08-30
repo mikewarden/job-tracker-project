@@ -328,7 +328,11 @@ modifyPost = (item) => {
 
   render() {
     const linkStyle = {
-          margin : "45%",
+          margin : "5%",
+          textDecoration: "none",
+          color: "#fff",
+          display: "inline-flex",
+          textAlign: "center"
 
          // display : "block"
     };
@@ -338,7 +342,7 @@ modifyPost = (item) => {
         <div className="JobTracker">
           <header>
             <h1>Job Tracker</h1>
-            <Link style={linkStyle} to="/">Home</Link> | 
+            <Link style={linkStyle} to="/">Home</Link>  
             <Link style={linkStyle} to="/form">Add Posting</Link>
           </header>
           <Route exact path="/" render={ props => (
