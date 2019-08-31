@@ -195,7 +195,7 @@ class Post extends React.Component {
           <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}><img src={edit} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
           <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
           <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.filterIcon()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
-          <button style={btn4Style} ><img src={this.altIcon1()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+          <button onClick={this.props.switchPostType.bind(this,postType)} style={btn4Style} ><img src={this.altIcon1()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
           <button style={btn4Style}><img src={this.altIcon2()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
              
          
@@ -229,7 +229,9 @@ class Postings extends React.Component {
 
      <Post key={item.id} p={item} deletePost={this.props.deletePost} 
      filterPost={this.props.filterPost} 
-     modifyPost={this.props.modifyPost} routeInfo={this.props.routeInfo}/>
+     modifyPost={this.props.modifyPost}
+     switchPostType={this.props.switchPostType}
+     routeInfo={this.props.routeInfo}/>
 
      ) )
     )
@@ -371,6 +373,14 @@ class JobTracker extends React.Component {
   }
 
 
+  //If the postType is set to "ideas" it logs to the console...
+
+  switchPostType = (type) => {
+    if (type === "ideas") {
+      console.log(type);
+    }
+  }
+
   modifyPost = (item, route) => {
     route.history.push({pathname: "/reform", state: {post : item}});
   }
@@ -412,7 +422,9 @@ class JobTracker extends React.Component {
         <ul className="Postings">
         <Postings posts={this.state.postList} deletePost={this.deletePost}
         filterPost={this.filterPost}
-        modifyPost={this.modifyPost} routeInfo={props}/>
+        modifyPost={this.modifyPost}
+        switchPostType={this.switchPostType}
+        routeInfo={props}/>
         </ul>
         </React.Fragment>
         )} />
