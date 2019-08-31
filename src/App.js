@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import SwitchTypes from './SwitchTypes.js';
 import Form from './Form.js';
+import ModForm from './ModForm.js';
 import './App.css';
 import edit from './edit-icon.svg';
 import lightbulbIcon from './lightbulb1.svg';
@@ -151,7 +152,7 @@ class Post extends React.Component {
 	render() { 
 
       const {id, filter, postType, compName, compSA, compCS, compZip, 
-             cNumber, cName, invwDate, pcDate, posTitle, posId, posUrl, 
+             cNumber, cName, invwDate, pcDate, posTitle, posUrl, 
              salary, posDead, date} = this.props.p;
 
       const pStyle = { textAlign : "center", margin: "0px"};
@@ -167,7 +168,7 @@ class Post extends React.Component {
           borderRadius : "20px",
                 cursor : "pointer",
                 float  : "right",
-               padding : "8px 10px"
+                padding: "8px 10px"
       };
 
       const btn2Style = {
@@ -177,7 +178,7 @@ class Post extends React.Component {
           borderRadius : "20px",
                 cursor : "pointer",
                 float  : "left",
-               padding : "8px 10px"
+                padding: "8px 10px"
       };
 
       const btn3Style = {
@@ -187,7 +188,7 @@ class Post extends React.Component {
           borderRadius : "20px",
                 cursor : "pointer",
                 float  : "left",
-               padding : "8px 10px"
+                padding: "8px 10px"
       };
 
      const btn4Style = {
@@ -199,6 +200,7 @@ class Post extends React.Component {
                 float  : "right",
                padding : "8px 10px",
                marginTop: "80px"
+
 
       }
 
@@ -219,10 +221,15 @@ class Post extends React.Component {
 
 
 
+      };
+      
+      let route = this.props.routeInfo;
+
+
 	    return (
         <div>
 	      <li className={ filter ? "nopost" : "post"} style={this.listStyle()}>
-          <button onClick={this.props.modifyPost.bind(this, this.props.p)} style={btn3Style}><img src={edit} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+          <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}><img src={edit} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
           <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
           <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.filterIcon()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
           <button style={btn4Style}><img src={phoneIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
@@ -235,15 +242,14 @@ class Post extends React.Component {
               {this.streetAddress(compSA, pStyle)}
               {this.cityState(compCS, pStyle)}
               {this.zipcode(compZip, pStyle)}
-              {this.contactName(cNumber, pStyle)}
-              {this.contactNumber(cName, pStyle)}
+              {this.contactName(cName, pStyle)}
+              {this.contactNumber(cNumber, pStyle)}
               {this.interviewDate(invwDate, pStyle)}
               {this.phoneCallDate(pcDate, pStyle)}
 		      </details>
           <hr width="10%"/>
 		      <details>
 			      	<summary>{posTitle}</summary>
-              {this.positionId(posId, pStyle)}
               {this.positionUrl(posUrl, pStyle)}
               {this.positionSalary(salary, pStyle)}
               {this.positionDeadline(posDead, pStyle)}
@@ -264,7 +270,7 @@ class Postings extends React.Component {
 
     	      <Post key={item.id} p={item} deletePost={this.props.deletePost} 
                                          filterPost={this.props.filterPost} 
-                                         modifyPost={this.props.modifyPost}/>
+                                         modifyPost={this.props.modifyPost} routeInfo={this.props.routeInfo}/>
 
          ) )
     	)
@@ -286,7 +292,7 @@ class JobTracker extends React.Component {
     // date is expected in the following format: 'Thu, 01 Jan 1970 00:00:00'
   	this.state = {
         postList : [{
-            id       : 0,
+            id       : new Date(),
             filter   : false,
             postType : "ideas",
             compName : "Company Name Here",
@@ -298,13 +304,12 @@ class JobTracker extends React.Component {
             invwDate : "12/12/2019",
             pcDate   : "01/13/2020",
             posTitle : "Position Title Here",
-            posId    : "#2346A876",
             posUrl   : "google.com",
             salary   : "$100k",
             posDead  : Date.parse('Jan 31, 2020 23:15:30'),
             date     : Date.parse('Aug 18, 2019 13:15:30')
         },{
-            id       : 1,
+            id       : new Date() + 1,
             filter   : false,
             postType : "applied",
             compName : "Company Name Here",
@@ -316,13 +321,12 @@ class JobTracker extends React.Component {
             invwDate : "12/12/2019",
             pcDate   : "01/13/2020",
             posTitle : "Position Title Here",
-            posId    : "#2346A876",
             posUrl   : "google.com",
             salary   : "$100k",
             posDead  : Date.parse('Dec 19, 2019 23:15:30'),
             date     : Date.parse('Aug 23, 2019 13:15:30')
         },{
-            id       : 2,
+            id       : new Date() + 2,
             filter   : false,
             postType : "contacted",
             compName : "Company Name Here",
@@ -334,7 +338,6 @@ class JobTracker extends React.Component {
             invwDate : "12/12/2019",
             pcDate   : "01/13/2020",
             posTitle : "Position Title Here",
-            posId    : "#2346A876",
             posUrl   : "google.com",
             salary   : "$100k",
             posDead  : Date.parse('May 1, 2020 23:15:30'),
@@ -376,12 +379,43 @@ class JobTracker extends React.Component {
     this.setState({
       postList: [...this.state.postList, newPost ]
     })
-    console.log(newPost);
-}
+    console.log("this is a new post: " + newPost);
+  }
 
-modifyPost = (item) => {
-    console.log("an item: " + item);
-}
+  editPost = (post) => {
+    let previousItem = this.state.postList.find(item => item.id === post.id);
+    let index = this.state.postList.indexOf(previousItem);
+  
+    let modifiedItem = {
+          id:       post.id,
+          filter:   post.filter,
+          postType: post.postType,
+          compName: post.company,
+          compSA:   post.street,
+          compCS:   post.cityState,
+          compZip:  post.zipCode,
+          cNumber:  post.phone,
+          cName:    post.contactName,
+          invwDate: Date.parse(post.interviewDate),
+          pcDate:   Date.parse(post.phoneCallDate),
+          posTitle: post.position,
+          posUrl:   post.website,
+          salary:   post.salary,
+          posDead:  post.deadline,
+          date:     post.date
+        }; 
+
+    // the splice does not change the whole list so only one item is rendered. The second
+    // setState rectifies this problem.
+    this.setState({ postList : [...this.state.postList.splice(index, 1, modifiedItem )] });
+    this.setState({ postList : [...this.state.postList] });
+  }
+
+
+  modifyPost = (item, route) => {
+      route.history.push({pathname: "/reform", state: {post : item}});
+  }
+
 
   filterPost = (type) => {
     console.log("type is: " + type);
@@ -404,8 +438,6 @@ modifyPost = (item) => {
           color: "#fff",
           display: "inline-flex",
           textAlign: "center"
-
-         // display : "block"
     };
 
     return (
@@ -421,12 +453,15 @@ modifyPost = (item) => {
               <ul className="Postings">
               <Postings posts={this.state.postList} deletePost={this.deletePost}
                                                     filterPost={this.filterPost}
-                                                    modifyPost={this.modifyPost}/>
+                                                    modifyPost={this.modifyPost} routeInfo={props}/>
               </ul>
             </React.Fragment>
             )} />
           <Route path="/form" render={ props => (
-            <Form addPost={this.addPost} editPost={this.editedPost}/>
+            <Form routeInfo={props} addPost={this.addPost} />
+            )} />
+          <Route path="/reform" render={ props => (
+            <ModForm routeInfo={props} editPost={this.editPost} />
             )} />
         </div>
       </Router>
