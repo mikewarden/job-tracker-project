@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {Link} from 'react-router-dom';
-
+import SwitchTypes from './SwitchTypes.js';
 import Form from './Form.js';
 import './App.css';
 import edit from './edit-icon.svg';
@@ -126,21 +126,7 @@ class Post extends React.Component {
           return starIcon;
         }
    };
-    //add 2 buttons:
-    altIcon = () => {
-      if (this.props.p.postType === "ideas" || this.props.p.postType === "applied") {
-          return <img className="filterBtn" src={starIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/>
-          } 
-          if (this.props.p.postType === "applied" || this.props.p.postType === "contacted") {
-          return <img className="filterBtn" src={lightbulbIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/>
-          } 
-          if (this.props.p.postType === "ideas" || this.props.p.postType === "contacted") {
-         return  <img className="filterBtn" src={phoneIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/>
-          } 
-   };
-
-   
-
+  
 
   
   getDateString = (date) => {
@@ -154,6 +140,12 @@ class Post extends React.Component {
     
   }
 
+
+ 
+
+  
+   
+      
 
 
 	render() { 
@@ -198,7 +190,7 @@ class Post extends React.Component {
                padding : "8px 10px"
       };
 
-      const btn4Style = {
+     const btn4Style = {
             background : "black",
                  color : "white",
                padding : "5px",
@@ -210,6 +202,19 @@ class Post extends React.Component {
 
       }
 
+      // if (this.props.p.postType === "ideas") {
+      //     return (<button style={btn4Style}><img src={phoneIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button> 
+      //       <button style={btn4Style}><img src={starIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>);
+      //     } 
+      // if (this.props.p.postType === "applied") {
+      //     return (<button style={btn4Style}><img src={lightbulbIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+      //     <button style={btn4Style}><img src={starIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>);
+      //     } 
+      // if (this.props.p.postType === "contacted") {
+      //    return (<button style={btn4Style}><img src={lightbulbIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>;
+      //     <button style={btn4Style}><img src={phoneIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>);
+      //     }   
+
      
 
 
@@ -220,10 +225,10 @@ class Post extends React.Component {
           <button onClick={this.props.modifyPost.bind(this, this.props.p)} style={btn3Style}><img src={edit} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
           <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
           <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.filterIcon()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+          <button style={btn4Style}><img src={phoneIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+          <button style={btn4Style}><img src={phoneIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
          
-          <button style={btn4Style}>{this.altIcon()}</button>;
-
-          <button style={btn4Style}>{this.altIcon()}</button>;
+         
          
 		      <details>
 			      	<summary>{compName}</summary>
@@ -265,6 +270,10 @@ class Postings extends React.Component {
     	)
     }
 }
+
+
+
+
 
 // Keeps track of all job postings the 
 // client is interested in (ideas), has
