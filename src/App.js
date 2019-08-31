@@ -13,96 +13,66 @@ import starIcon from './star1.svg';
 class Post extends React.Component {
 
 
-  streetAddress = (addr, pStyle) => {
+  address = (addr, city, zip, pStyle) => {
     if (addr) {
-     return <p style={pStyle}>Address: {addr}</p>
-   } else {
-    return <p style={{display : "none"}}></p>
+      return <address>Address: {addr}, {city}  {zip}</address>
+    } else {
+      return
+    }
   }
-}
 
-cityState = (city, pStyle) => {
-  if (city) {
-   return <p style={pStyle}>City, State: {city}</p>
- } else {
-  return <p style={{display : "none"}}></p>
-}
-}
 
-zipcode = (zip, pStyle) => {
-  if (zip) {
-   return <p style={pStyle}>Zip: {zip}</p>
- } else {
-  return <p style={{display : "none"}}></p>
-}
-}
+  contact = (name, num, pStyle) => {
+    if (name) {
+      return <address>{name} : {num}</address>
+    } else {
+      return
+    }
+  }
 
-contactName = (name, pStyle) => {
-  if (name) {
-   return <p style={pStyle}>Contact: {name}</p>
- } else {
-  return <p style={{display : "none"}}></p>
-}
-}
 
-contactNumber = (num, pStyle) => {
-  if (num) {
-   return <p style={pStyle}>Cell: {num}</p>
- } else {
-  return <p style={{display : "none"}}></p>
-}
-}
+  interviewDate = (interview, pStyle) => {
+    if (interview) {
+      return <p style={pStyle}>Interview Date: {interview}</p>
+    } else {
+      return
+    }
+  }
 
-interviewDate = (interview, pStyle) => {
-  if (interview) {
-   return <p style={pStyle}>Interview Date: {interview}</p>
- } else {
-  return <p style={{display : "none"}}></p>
-}
-}
+  phoneCallDate = (callD, pStyle) => {
+    if (callD) {
+      return <p style={pStyle}>Contacted: {callD}</p>
+    } else {
+      return
+    }
+  }
 
-phoneCallDate = (callD, pStyle) => {
-  if (callD) {
-   return <p style={pStyle}>Contacted: {callD}</p>
- } else {
-  return <p style={{display : "none"}}></p>
-}
-}
+  positionUrl = (url, pStyle) => {
+    if (url) {
+      return <a href={"https://www." + url} target={"_blank"}>{url}</a>
+    } else {
+      return
+    }
+  }
 
-positionId = (id, pStyle) => {
-  if (id) {
-   return <p style={pStyle}>Job Id: {id}</p>
- } else {
-  return <p style={{display : "none"}}></p>
-}
-}
+  positionSalary = (salary, pStyle) => {
+    if (salary) {
+      return <p style={pStyle}>Salary: {salary}</p>
+    } else {
+      return
+    }
+  }
 
-positionUrl = (url, pStyle) => {
-  if (url) {
-   return <p style={pStyle}>url: {url}</p>
- } else {
-  return <p style={{display : "none"}}></p>
-}
-}
+  positionDeadline = (deadline, pStyle) => {
+    if (deadline) {
+      return <p style={pStyle}>Deadline: {deadline}</p>
+    } else {
+      return
+    }
+  }
 
-positionSalary = (salary, pStyle) => {
-  if (salary) {
-   return <p style={pStyle}>Salary: {salary}</p>
- } else {
-  return <p style={{display : "none"}}></p>
-}
-}
-
-positionDeadline = (deadline, pStyle) => {
-  if (deadline) {
-   return <p style={pStyle}>Deadline: {deadline}</p>
- } else {
-  return <p style={{display : "none"}}></p>
-}
-}
-
-   // dynamic style!
-   listStyle = () => {
+  // dynamic style!
+  listStyle = () => {
     if (this.props.p.postType === "ideas") {
       return { backgroundColor : "#EB1200" };
 
@@ -110,8 +80,8 @@ positionDeadline = (deadline, pStyle) => {
       return { backgroundColor : "#0CAFE8" };
 
     } else if (this.props.p.postType === "contacted")
-    return { backgroundColor : "#0BFF0A" };
-  };
+      return { backgroundColor : "#0BFF0A" };
+    };
 
   filterIcon = () => {
     if (this.props.p.postType === "ideas") {
@@ -248,20 +218,17 @@ positionDeadline = (deadline, pStyle) => {
 
       <details>
       <summary style={{outline: "none"}}>{compName}</summary>
-      {this.streetAddress(compSA, pStyle)}
-      {this.cityState(compCS, pStyle)}
-      {this.zipcode(compZip, pStyle)}
-      {this.contactName(cName, pStyle)}
-      {this.contactNumber(cNumber, pStyle)}
-      {this.interviewDate(invwDate, pStyle)}
-      {this.phoneCallDate(pcDate, pStyle)}
+      {this.address(compSA, compCS, compZip, pStyle)}
+      {this.contact(cName, cNumber, pStyle)}
+      {this.interviewDate(Date(invwDate), pStyle)}
+      {this.phoneCallDate(Date(pcDate), pStyle)}
       </details>
       <hr width="10%"/>
       <details>
       <summary style={{outline: "none"}}>{posTitle}</summary>
       {this.positionUrl(posUrl, pStyle)}
       {this.positionSalary(salary, pStyle)}
-      {this.positionDeadline(posDead, pStyle)}
+      {this.positionDeadline(Date(posDead), pStyle)}
       </details>
       <p>{this.getDateString(date)}</p>
       </li>
@@ -310,8 +277,8 @@ class JobTracker extends React.Component {
         compZip  : 75229,
         cNumber  : "480-294-0824",
         cName    : "Melissa Stines",
-        invwDate : "12/12/2019",
-        pcDate   : "01/13/2020",
+        invwDate : Date.parse("12/12/2019"),
+        pcDate   : Date.parse("01/13/2020"),
         posTitle : "Position Title Here",
         posUrl   : "google.com",
         salary   : "$100k",
@@ -382,8 +349,8 @@ class JobTracker extends React.Component {
       posTitle: post.position,
       posUrl: post.website,
       salary: post.salary,
-      posDead: post.deadline,
-      date: now
+      posDead: Date.parse(post.deadline),
+      date: Date.parse(now)
     }
     this.setState({
       postList: [...this.state.postList, newPost ]
@@ -410,7 +377,7 @@ class JobTracker extends React.Component {
       posTitle: post.position,
       posUrl:   post.website,
       salary:   post.salary,
-      posDead:  post.deadline,
+      posDead:  Date.parse(post.deadline),
       date:     post.date
     }; 
 
