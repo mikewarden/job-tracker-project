@@ -55,6 +55,12 @@ input {
   margin-bottom: 7px;
 }
 
+label {
+  width: 300px;  /* this needs to be in a media query */
+  padding: 5px;
+  float: left;
+} 
+
 body {
   background-image: linear-gradient(to right, #7700FF , #0CAFE8);
 }
