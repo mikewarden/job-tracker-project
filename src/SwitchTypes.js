@@ -6,10 +6,10 @@ import phoneIcon from './phone1.svg';
 import starIcon from './star1.svg';
 
 const SwitchTypes = () => {
-		return (
-				<div></div>
-			)
+	return (
+		<div></div>
+		)
 		
-}
+	}
 
-export default SwitchTypes;
+	export default SwitchTypes;

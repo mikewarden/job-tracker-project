@@ -29,7 +29,7 @@ class ModForm extends React.Component {
 		event.preventDefault();
 		let thisPost = this.state;
 		this.props.editPost(thisPost);
-	    this.setState({
+		this.setState({
 			company: "",
 			street: "",
 			cityState: "",
@@ -53,39 +53,39 @@ class ModForm extends React.Component {
 	}
 
     // date is expected in the following format: 'Thu, 01 Jan 1970 00:00:00'
-  	render() {
-    return (
-      <div className="ModForm">
-        <form onSubmit={this.onSubmit} action="/">
-        	<input type="text" name="company" placeholder="Company Name" value={this.state.company} onChange={this.onChange} required/>
-        	<br/>
-        	<input type="text" name="street" placeholder="Street Address" value={this.state.street} onChange={this.onChange} />
-        	<br/>
-        	<input type="text" name="cityState" placeholder="City,State" value={this.state.cityState} onChange={this.onChange} />
-        	<br/>
-        	<input type="text" name="zipCode" placeholder="Zip Code" value={this.state.zipCode} onChange={this.onChange} />
-        	<br/>
-        	<input type="text" name="phone" placeholder="Phone Number" value={this.state.phone} onChange={this.onChange} required/>
-        	<br/>
-        	<input type="text" name="contactName" placeholder="Contact Name" value={this.state.contactName} onChange={this.onChange} />
-        	<br/>
-        	<input type="text" name="interviewDate" placeholder="Interview Date" value={this.state.interviewDate} onChange={this.onChange} />
-        	<br/>
-        	<input type="text" name="phoneCallDate" placeholder="Phone Call Date" value={this.state.phoneCallDate} onChange={this.onChange} />
-        	<br/>
-        	<input type="text" name="position" placeholder="Desired Position" value={this.state.position} onChange={this.onChange} />
-        	<br/>
-        	<input type="text" name="website" placeholder="Website URL" value={this.state.website} onChange={this.onChange} required/>
-        	<br/>
-        	<input type="text" name="salary" placeholder="Salary" value={this.state.salary} onChange={this.onChange} />
-        	<br/>
-        	<input type="text" name="deadline" placeholder="Deadline" value={this.state.deadline} onChange={this.onChange} />
-        	<br/>
-        	<input type="submit" className="submit-btn" value="Submit"/>
-		</form>
-      </div>
-    );
-  }
+    render() {
+    	return (
+    		<div className="Form">
+    		<form onSubmit={this.onSubmit} action="/">
+    		<input type="text" name="company" placeholder="Company Name" value={this.state.company} onChange={this.onChange} required/>
+    		<br/>
+    		<input type="text" name="street" placeholder="Street Address" value={this.state.street} onChange={this.onChange} />
+    		<br/>
+    		<input type="text" name="cityState" placeholder="City,State" value={this.state.cityState} onChange={this.onChange} />
+    		<br/>
+    		<input type="text" name="zipCode" placeholder="Zip Code" value={this.state.zipCode} onChange={this.onChange} />
+    		<br/>
+    		<input type="text" name="phone" placeholder="Phone Number" value={this.state.phone} onChange={this.onChange} required/>
+    		<br/>
+    		<input type="text" name="contactName" placeholder="Contact Name" value={this.state.contactName} onChange={this.onChange} />
+    		<br/>
+    		<input type="text" name="interviewDate" placeholder="Interview Date" value={this.state.interviewDate} onChange={this.onChange} />
+    		<br/>
+    		<input type="text" name="phoneCallDate" placeholder="Phone Call Date" value={this.state.phoneCallDate} onChange={this.onChange} />
+    		<br/>
+    		<input type="text" name="position" placeholder="Desired Position" value={this.state.position} onChange={this.onChange} />
+    		<br/>
+    		<input type="text" name="website" placeholder="Website URL" value={this.state.website} onChange={this.onChange} required/>
+    		<br/>
+    		<input type="text" name="salary" placeholder="Salary" value={this.state.salary} onChange={this.onChange} />
+    		<br/>
+    		<input type="text" name="deadline" placeholder="Deadline" value={this.state.deadline} onChange={this.onChange} />
+    		<br/>
+    		<input type="submit" className="submit-btn" value="Submit"/>
+    		</form>
+    		</div>
+    		);
+    }
 }
 
 
