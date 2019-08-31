@@ -122,9 +122,24 @@ class Post extends React.Component {
       } else if (this.props.p.postType === "applied") {
           return phoneIcon;
 
-      } else if (this.props.p.postType === "contacted")
+      } else if (this.props.p.postType === "contacted") {
           return starIcon;
+        }
    };
+    //add 2 buttons:
+    altIcon = () => {
+      if (this.props.p.postType === "ideas" || this.props.p.postType === "applied") {
+          return <img className="filterBtn" src={starIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/>
+          } 
+          if (this.props.p.postType === "applied" || this.props.p.postType === "contacted") {
+          return <img className="filterBtn" src={lightbulbIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/>
+          } 
+          if (this.props.p.postType === "ideas" || this.props.p.postType === "contacted") {
+         return  <img className="filterBtn" src={phoneIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/>
+          } 
+   };
+
+   
 
 
   
@@ -183,6 +198,18 @@ class Post extends React.Component {
                padding : "8px 10px"
       };
 
+      const btn4Style = {
+            background : "black",
+                 color : "white",
+               padding : "5px",
+          borderRadius : "20px",
+                cursor : "pointer",
+                float  : "right",
+               padding : "8px 10px",
+               marginTop: "80px"
+
+      }
+
      
 
 
@@ -193,6 +220,11 @@ class Post extends React.Component {
           <button onClick={this.props.modifyPost.bind(this, this.props.p)} style={btn3Style}><img src={edit} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
           <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
           <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.filterIcon()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+         
+          <button style={btn4Style}>{this.altIcon()}</button>;
+
+          <button style={btn4Style}>{this.altIcon()}</button>;
+         
 		      <details>
 			      	<summary>{compName}</summary>
               {this.streetAddress(compSA, pStyle)}
