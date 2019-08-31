@@ -219,9 +219,6 @@ class Post extends React.Component {
 
      
 
-
-
-      };
       
       let route = this.props.routeInfo;
 
