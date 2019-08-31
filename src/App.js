@@ -127,6 +127,32 @@ class Post extends React.Component {
           return starIcon;
         }
    };
+
+     altIcon1 = () => {
+
+      if (this.props.p.postType === "ideas") {
+            return phoneIcon;
+          } 
+      if (this.props.p.postType === "applied") {
+            return starIcon;
+          } 
+      if (this.props.p.postType === "contacted") {
+            return lightbulbIcon;
+          }   
+      }
+
+      altIcon2 = () => {
+
+      if (this.props.p.postType === "ideas") {
+            return starIcon;
+          } 
+      if (this.props.p.postType === "applied") {
+            return lightbulbIcon;
+          } 
+      if (this.props.p.postType === "contacted") {
+            return phoneIcon;
+          }   
+      }
   
 
   
@@ -204,18 +230,7 @@ class Post extends React.Component {
 
       }
 
-      // if (this.props.p.postType === "ideas") {
-      //     return (<button style={btn4Style}><img src={phoneIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button> 
-      //       <button style={btn4Style}><img src={starIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>);
-      //     } 
-      // if (this.props.p.postType === "applied") {
-      //     return (<button style={btn4Style}><img src={lightbulbIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
-      //     <button style={btn4Style}><img src={starIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>);
-      //     } 
-      // if (this.props.p.postType === "contacted") {
-      //    return (<button style={btn4Style}><img src={lightbulbIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>;
-      //     <button style={btn4Style}><img src={phoneIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>);
-      //     }   
+    
 
      
 
@@ -229,8 +244,8 @@ class Post extends React.Component {
           <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}><img src={edit} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
           <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
           <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.filterIcon()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
-          <button style={btn4Style}><img src={phoneIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
-          <button style={btn4Style}><img src={phoneIcon} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+          <button style={btn4Style}><img src={this.altIcon1()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+          <button style={btn4Style}><img src={this.altIcon2()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
          
          
          
