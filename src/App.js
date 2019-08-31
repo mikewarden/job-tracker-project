@@ -178,7 +178,7 @@ positionDeadline = (deadline, pStyle) => {
      cNumber, cName, invwDate, pcDate, posTitle, posUrl, 
      salary, posDead, date} = this.props.p;
 
-     const pStyle = { textAlign : "center", margin: "0px"};
+     const pStyle = { textAlign: "center", margin: "0px", outline: "none"};
 
 
 
@@ -247,7 +247,7 @@ positionDeadline = (deadline, pStyle) => {
 
 
       <details>
-      <summary>{compName}</summary>
+      <summary style={{outline: "none"}}>{compName}</summary>
       {this.streetAddress(compSA, pStyle)}
       {this.cityState(compCS, pStyle)}
       {this.zipcode(compZip, pStyle)}
@@ -258,7 +258,7 @@ positionDeadline = (deadline, pStyle) => {
       </details>
       <hr width="10%"/>
       <details>
-      <summary>{posTitle}</summary>
+      <summary style={{outline: "none"}}>{posTitle}</summary>
       {this.positionUrl(posUrl, pStyle)}
       {this.positionSalary(salary, pStyle)}
       {this.positionDeadline(posDead, pStyle)}

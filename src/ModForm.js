@@ -55,7 +55,7 @@ class ModForm extends React.Component {
     // date is expected in the following format: 'Thu, 01 Jan 1970 00:00:00'
     render() {
     	return (
-    		<div className="ModForm">
+    		<div className="Form">
     		<form onSubmit={this.onSubmit} action="/">
     		<input type="text" name="company" placeholder="Company Name" value={this.state.company} onChange={this.onChange} required/>
     		<br/>
