@@ -153,6 +153,10 @@ class Post extends React.Component {
             return phoneIcon;
           }   
       }
+
+      switchType = () => {
+        console.log("hey");
+      }
   
 
   
@@ -244,7 +248,7 @@ class Post extends React.Component {
           <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}><img src={edit} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
           <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
           <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.filterIcon()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
-          <button style={btn4Style}><img src={this.altIcon1()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+          <button style={btn4Style} ><img src={this.altIcon1()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
           <button style={btn4Style}><img src={this.altIcon2()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
          
          
