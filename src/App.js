@@ -76,6 +76,24 @@ class Post extends React.Component {
     if (this.props.p.postType === "ideas") {
       return { backgroundColor : "#EB1200" };
 
+<<<<<<< HEAD
+      altIcon2 = () => {
+
+      if (this.props.p.postType === "ideas") {
+            return starIcon;
+          } 
+      if (this.props.p.postType === "applied") {
+            return lightbulbIcon;
+          } 
+      if (this.props.p.postType === "contacted") {
+            return phoneIcon;
+          }   
+      }
+
+      switchType = () => {
+        console.log("hey");
+      }
+=======
     } else if (this.props.p.postType === "applied") {
       return { backgroundColor : "#0CAFE8" };
 
@@ -120,6 +138,7 @@ class Post extends React.Component {
       return phoneIcon;
     }   
   }
+>>>>>>> 7bff5f392b5dba6fefd0ad336390a65ccb79c008
   
 
   
@@ -154,6 +173,46 @@ class Post extends React.Component {
 
 
 
+<<<<<<< HEAD
+     
+
+      
+      let route = this.props.routeInfo;
+
+
+	    return (
+        <div>
+	      <li className={ filter ? "nopost" : "post"} style={this.listStyle()}>
+          <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}><img src={edit} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+          <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
+          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.filterIcon()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+          <button style={btn4Style} ><img src={this.altIcon1()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+          <button style={btn4Style}><img src={this.altIcon2()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+         
+         
+         
+		      <details>
+			      	<summary>{compName}</summary>
+              {this.streetAddress(compSA, pStyle)}
+              {this.cityState(compCS, pStyle)}
+              {this.zipcode(compZip, pStyle)}
+              {this.contactName(cName, pStyle)}
+              {this.contactNumber(cNumber, pStyle)}
+              {this.interviewDate(invwDate, pStyle)}
+              {this.phoneCallDate(pcDate, pStyle)}
+		      </details>
+          <hr width="10%"/>
+		      <details>
+			      	<summary>{posTitle}</summary>
+              {this.positionUrl(posUrl, pStyle)}
+              {this.positionSalary(salary, pStyle)}
+              {this.positionDeadline(posDead, pStyle)}
+		      </details>
+          <p>{this.getDateString(date)}</p>
+	      </li>
+        </div>
+	    	);
+=======
      const btn1Style = {
       background : "black",
       color : "white",
@@ -195,6 +254,7 @@ class Post extends React.Component {
       marginTop: "80px"
 
 
+>>>>>>> 7bff5f392b5dba6fefd0ad336390a65ccb79c008
     }
 
     
