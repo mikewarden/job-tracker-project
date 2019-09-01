@@ -7,7 +7,7 @@ import './App.css';
 import edit from './pencil2.svg';
 import lightbulbIcon from './lightbulb2.svg';
 import phoneIcon from './phone4.svg';
-import starIcon from './star2.svg';
+import starIcon from './checkmark.svg';
 
 class Post extends React.Component {
 
