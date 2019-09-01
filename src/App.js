@@ -4,10 +4,10 @@ import {Link} from 'react-router-dom';
 import Form from './Form.js';
 import ModForm from './ModForm.js';
 import './App.css';
-import edit from './edit-icon.svg';
-import lightbulbIcon from './lightbulb1.svg';
-import phoneIcon from './phone1.svg';
-import starIcon from './star1.svg';
+import edit from './pencil2.svg';
+import lightbulbIcon from './lightbulb2.svg';
+import phoneIcon from './phone4.svg';
+import starIcon from './star2.svg';
 
 class Post extends React.Component {
 
@@ -158,44 +158,47 @@ class Post extends React.Component {
 
      
      const btn1Style = {
-      background : "black",
-      color : "white",
+      background : "#000",
+      color : "#fff",
       padding : "5px",
       borderRadius : "20px",
       cursor : "pointer",
       float  : "right",
-      padding: "8px 10px"
+      padding: "8px 10px",
+      marginTop: "7px",
+      marginRight: "7px"
     };
 
     const btn2Style = {
-      background : "black",
-      color : "white",
+      background : "#000",
       padding : "5px",
       borderRadius : "20px",
       cursor : "pointer",
       float  : "left",
-      padding: "8px 10px"
+      padding: "4px 5px"
     };
 
     const btn3Style = {
-      background : "black",
-      color : "white",
+      background : "#000",
       padding : "5px",
       borderRadius : "20px",
       cursor : "pointer",
       float  : "left",
-      padding: "8px 10px"
+      padding: "4px 5px",
+      marginLeft: "20px",
+      marginRight: "5px"
     };
 
     const btn4Style = {
-      background : "black",
-      color : "white",
+      background : "#000",
       padding : "5px",
       borderRadius : "20px",
       cursor : "pointer",
       float  : "right",
-      padding : "8px 10px",
-      marginTop: "80px"
+      padding : "4px 5px",
+      marginTop: "80px",
+      marginLeft: "3px",
+      marginRight: "2px"
     };
 
       
@@ -205,11 +208,11 @@ class Post extends React.Component {
 	    return (
         <div>
 	      <li className={ filter ? "nopost" : "post"} style={this.listStyle()}>
-          <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}><img src={edit} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+          <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}><img src={edit} style={{width: "14px", height: "14px"}} title={"Modify Post"}/></button>
           <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
-          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.filterIcon()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
-          <button onClick={this.props.switchPostType.bind(this,postType)} style={btn4Style} ><img src={this.altIcon1()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
-          <button style={btn4Style}><img src={this.altIcon2()} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style} title={"Filter by Post Type"}><img className="filterBtn" src={this.filterIcon()} style={{width: "14px", height: "14px"}}/></button>
+          <button onClick={this.props.switchPostType.bind(this,postType)} style={btn4Style} title={"Switch Post Type"} ><img src={this.altIcon1()} style={{width: "14px", height: "14px"}}/></button>
+          <button style={btn4Style}><img src={this.altIcon2()} style={{width: "14px", height: "14px"}} title={"Switch Post Type"} /></button>
              
          
           <details>
