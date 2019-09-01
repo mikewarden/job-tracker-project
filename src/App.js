@@ -182,15 +182,9 @@ class Post extends React.Component {
 	      <li className={ filter ? "nopost" : "post"} style={this.listStyle()}>
           <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}><img src={edit} style={{width: "14px", height: "14px"}} title={"Modify Post"}/></button>
           <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
-<<<<<<< HEAD
-          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style} title={"Filter by Post Type"}><img className="filterBtn" src={this.filterIcon()} style={{width: "14px", height: "14px"}}/></button>
-          <button onClick={this.props.switchPostType.bind(this,postType)} style={btn4Style} title={"Switch Post Type"} ><img src={this.altIcon1()} style={{width: "14px", height: "14px"}}/></button>
-          <button style={btn4Style}><img src={this.altIcon2()} style={{width: "14px", height: "14px"}} title={"Switch Post Type"} /></button>
-=======
-          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.getIcon(postType)} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
-          <button onClick={this.props.switchPostType.bind(this, btn1Type, this.props.p)} style={btn4Style} ><img src={this.getIcon(btn1Type)} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
-          <button onClick={this.props.switchPostType.bind(this, btn2Type, this.props.p)} style={btn4Style} ><img src={this.getIcon(btn2Type)} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
->>>>>>> f6404afe139bcae96e419f111d4663418c6485f4
+          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.getIcon(postType)} style={{width: "14px", height: "14px"}}/></button>
+          <button onClick={this.props.switchPostType.bind(this, btn1Type, this.props.p)} style={btn4Style} ><img src={this.getIcon(btn1Type)} style={{width: "14px", height: "14px"}}/></button>
+          <button onClick={this.props.switchPostType.bind(this, btn2Type, this.props.p)} style={btn4Style} ><img src={this.getIcon(btn2Type)} style={{width: "14px", height: "14px"}}/></button>
              
          
           <details>
