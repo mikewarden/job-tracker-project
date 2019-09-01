@@ -51,6 +51,8 @@ class Form extends React.Component {
     	return (
     		<div className="Form">
 	    		<form onSubmit={this.onSubmit} action="/">
+	    			<h3>Add New Post: </h3>
+	    			
 		    		<label>Company:</label><div><input type="text" name="company" placeholder="Company Name" value={this.state.company} onChange={this.onChange} required/></div>
 		    		<label>Address:</label><div><input type="text" name="street" placeholder="Street Address" value={this.state.street} onChange={this.onChange} /></div>
 		    		<label>City & State:</label><div><input type="text" name="cityState" placeholder="City,State" value={this.state.cityState} onChange={this.onChange} /></div>

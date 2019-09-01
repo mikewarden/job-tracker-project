@@ -5,7 +5,7 @@ import Form from './Form.js';
 import ModForm from './ModForm.js';
 import './App.css';
 import edit from './pencil2.svg';
-import lightbulbIcon from './lightbulb2.svg';
+import lightbulbIcon from './lightbulb3.svg';
 import phoneIcon from './phone4.svg';
 import starIcon from './checkmark.svg';
 
@@ -75,13 +75,13 @@ class Post extends React.Component {
   // dynamic style!
   listStyle = () => {
     if (this.props.p.postType === "ideas") {
-      return { backgroundColor : "#EB1200" };
+      return { backgroundColor : "#FEF9C7", color: "#000" };
 
     } else if (this.props.p.postType === "applied") {
-      return { backgroundColor : "#0CAFE8" };
+      return { backgroundColor : "#9FEDD7", color: "#000"  };
 
     } else if (this.props.p.postType === "contacted")
-      return { backgroundColor : "#0BFF0A" };
+      return { backgroundColor : "#FCE181", color: "#000"  };
     }
 
   getIcon = (iconType) => {
@@ -143,7 +143,7 @@ class Post extends React.Component {
       border: "none",
       overflow: "hidden",
       outline:"none",
-      color : "#fff",
+      color : "#000",
       borderRadius : "20px",
       cursor : "pointer",
       float  : "right",
@@ -200,11 +200,11 @@ class Post extends React.Component {
 	    return (
         <div>
 	      <li className={ filter ? "nopost" : "post"} style={this.listStyle()}>
-          <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}><img src={edit} alt={"Modify Post"} style={{width: "22px", height: "22px"}} title={"Modify Post"}/></button>
-          <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
-          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.getIcon(postType)} alt={"Filter Button"} style={{width: "22px", height: "22px"}}/></button>
-          <button onClick={this.props.switchPostType.bind(this, btn1Type, this.props.p)} style={btn4Style} ><img src={this.getIcon(btn1Type)} alt={"Move Button"} style={{width: "22px", height: "22px"}}/></button>
-          <button onClick={this.props.switchPostType.bind(this, btn2Type, this.props.p)} style={btn4Style} ><img src={this.getIcon(btn2Type)} alt={"Move Button"} style={{width: "22px", height: "22px"}}/></button>
+          <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}><img src={edit} alt={"Modify Post"} style={{width: "25px", height: "25px"}} title={"Modify Post"}/></button>
+          <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style} title={"Delete Post"}>X</button>
+          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}  title={"Filter Post by Type"}><img className="filterBtn" src={this.getIcon(postType)} alt={"Filter Button"} style={{width: "25px", height: "25px"}}/></button>
+          <button onClick={this.props.switchPostType.bind(this, btn1Type, this.props.p)} style={btn4Style} title={"Change Post Type"} ><img src={this.getIcon(btn1Type)} alt={"Move Button"} style={{width: "25px", height: "25px"}}/></button>
+          <button onClick={this.props.switchPostType.bind(this, btn2Type, this.props.p)} style={btn4Style}  title={"Change Post Type"} ><img src={this.getIcon(btn2Type)} alt={"Move Button"} style={{width: "25px", height: "25px"}}/></button>
              
          
           <details>

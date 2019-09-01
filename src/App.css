@@ -2,15 +2,39 @@
 .post {
 	list-style-type : none;
     border: bisque 8px;
-    border: 2px solid #FFF3D9;
-    border-radius: 15vw;
+    /*border: 2px solid #FFF3D9;*/
+    border-radius: 9vw;
     text-align: center;
     margin-bottom: 8px;
     margin-right: 40px;
     opacity: 0.78;
     color: #FFF;
     padding: 8px;
-}
+  }
+
+  @media (min-width:700px) {
+    .post {
+      width: 500px;
+      text-align: center;
+      margin-left: 100px;
+    }
+  }
+
+    @media (min-width:1000px) {
+    .post {
+      width: 500px;
+      text-align: center;
+      margin-left: 300px;
+    }
+  }
+
+  @media (min-width:1200px) {
+    .post {
+      width: 500px;
+      text-align: center;
+      margin-left: 400px;
+    }
+  }
 
 .nopost {
 	list-style-type : none;
@@ -23,20 +47,29 @@
 
 .submit-btn {
   border-radius: 20px;
-  margin: 10px 0px 10px 0px;
-
+  margin: 20px 0px 20px 0px;
+  background-color: #FCE181;
+  width: 100px;
 }
 
 .Form {
   text-align: center;
   border: 2px solid #fff;
   border-radius: 70px;
-  margin: 6px 100px;
+  margin: 15px 100px;
   padding-top: 20px;
   padding-bottom: 5px;
-  background-color: #000;
-  opacity: 0.6;
-  color: #fff;
+  background-color: #9FEDD7;
+ /* opacity: 0.6;*/
+  color: #000#FEF9C7;
+}
+
+@media (min-width: 800px) {
+  .Form {
+    width: 50%;
+    margin-left: 300px;
+    margin-top: 50px;
+  }
 }
 
 h1 {
@@ -47,12 +80,25 @@ h1 {
 input {
   width: 70%;
   border-radius: 30px;
-  border: 2px solid #FFF3D9;
-  background-color: rgba(0,0,0,0.0);
+  border: 3px solid #026670;
+  background-color: #FEF9C7;
   opacity: 0.95;
-  color: #FFF;
+  color: #000;
   padding: 6px;
   margin-bottom: 7px;
+}
+
+@media (min-width: 800px) {
+  input {
+    width: 70%;
+    margin-right: 30px;
+  }
+}
+@media (min-width: 900px) {
+  input {
+    width: 60%;
+    margin-right: 30px;
+  }
 }
 
 label {
@@ -62,7 +108,8 @@ label {
 } 
 
 body {
-  background-image: linear-gradient(to right, #7700FF , #0CAFE8);
+  /*background-image: linear-gradient(to right, #7700FF , #0CAFE8);*/
+  background-color: #026670;
 }
 
 ul {
@@ -71,4 +118,8 @@ ul {
 
 ::placeholder {
   color: #FFF3D9;
+}
+
+.no-italics {
+    font-style: normal;   
 }
