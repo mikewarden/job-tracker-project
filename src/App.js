@@ -82,45 +82,17 @@ class Post extends React.Component {
       return { backgroundColor : "#0BFF0A" };
     }
 
-  filterIcon = () => {
-    if (this.props.p.postType === "ideas") {
+  getIcon = (iconType) => {
+    if (iconType === "ideas") {
       return lightbulbIcon;
 
-    } else if (this.props.p.postType === "applied") {
-      return phoneIcon;
-
-    } else if (this.props.p.postType === "contacted") {
+    } else if (iconType === "applied") {
       return starIcon;
+
+    } else if (iconType === "contacted") {
+      return phoneIcon;
     }
   };
-
-  altIcon1 = () => {
-
-    if (this.props.p.postType === "ideas") {
-      return phoneIcon;
-    } 
-    if (this.props.p.postType === "applied") {
-      return starIcon;
-    } 
-    if (this.props.p.postType === "contacted") {
-      return lightbulbIcon;
-    }   
-  }
-
-  altIcon2 = () => {
-
-    if (this.props.p.postType === "ideas") {
-      return starIcon;
-    } 
-    if (this.props.p.postType === "applied") {
-      return lightbulbIcon;
-    } 
-    if (this.props.p.postType === "contacted") {
-      return phoneIcon;
-    }   
-  }
-  
-
   
   getDateDifference = (date) => {
     let now = Date.now();
@@ -150,7 +122,7 @@ class Post extends React.Component {
 
   render() { 
 
-    const {id, filter, postType, compName, compSA, compCS, compZip, 
+    const {id, filter, postType, btn1Type, btn2Type, compName, compSA, compCS, compZip, 
      cNumber, cName, invwDate, pcDate, posTitle, posUrl, 
      salary, posDead, date} = this.props.p;
 
@@ -210,9 +182,15 @@ class Post extends React.Component {
 	      <li className={ filter ? "nopost" : "post"} style={this.listStyle()}>
           <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}><img src={edit} style={{width: "14px", height: "14px"}} title={"Modify Post"}/></button>
           <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
+<<<<<<< HEAD
           <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style} title={"Filter by Post Type"}><img className="filterBtn" src={this.filterIcon()} style={{width: "14px", height: "14px"}}/></button>
           <button onClick={this.props.switchPostType.bind(this,postType)} style={btn4Style} title={"Switch Post Type"} ><img src={this.altIcon1()} style={{width: "14px", height: "14px"}}/></button>
           <button style={btn4Style}><img src={this.altIcon2()} style={{width: "14px", height: "14px"}} title={"Switch Post Type"} /></button>
+=======
+          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.getIcon(postType)} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+          <button onClick={this.props.switchPostType.bind(this, btn1Type, this.props.p)} style={btn4Style} ><img src={this.getIcon(btn1Type)} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+          <button onClick={this.props.switchPostType.bind(this, btn2Type, this.props.p)} style={btn4Style} ><img src={this.getIcon(btn2Type)} style={{width: "15px", height: "15px", backgroundColor: "#fff"}}/></button>
+>>>>>>> f6404afe139bcae96e419f111d4663418c6485f4
              
          
           <details>
@@ -272,6 +250,8 @@ class JobTracker extends React.Component {
         id       : new Date(),
         filter   : false,
         postType : "ideas",
+        btn1Type : "applied",
+        btn2Type : "contacted",
         compName : "Company Name Here",
         compSA   : "123 Main St.",
         compCS   : "Dallas, Texas",
@@ -289,6 +269,8 @@ class JobTracker extends React.Component {
         id       : new Date() + 1,
         filter   : false,
         postType : "applied",
+        btn1Type : "contacted",
+        btn2Type : "ideas",
         compName : "Company Name Here",
         compSA   : "123 Main St.",
         compCS   : "Dallas, Texas",
@@ -306,6 +288,8 @@ class JobTracker extends React.Component {
         id       : new Date() + 2,
         filter   : false,
         postType : "contacted",
+        btn1Type : "ideas",
+        btn2Type : "applied",
         compName : "Company Name Here",
         compSA   : "123 Main St.",
         compCS   : "Dallas, Texas",
@@ -339,6 +323,8 @@ class JobTracker extends React.Component {
       id: now, 
       filter: false,
       postType: "ideas",
+      btn1Type : "applied",
+      btn2Type : "contacted",
       compName: post.company,
       compSA: post.street,
       compCS: post.cityState,
@@ -356,7 +342,6 @@ class JobTracker extends React.Component {
     this.setState({
       postList: [...this.state.postList, newPost ]
     })
-    console.log("this is a new post: " + newPost);
   }
 
   editPost = (post) => {
@@ -367,6 +352,8 @@ class JobTracker extends React.Component {
       id:       post.id,
       filter:   post.filter,
       postType: post.postType,
+      btn1Type: post.btn1Type,
+      btn2Type: post.btn2Type,
       compName: post.company,
       compSA:   post.street,
       compCS:   post.cityState,
@@ -391,10 +378,22 @@ class JobTracker extends React.Component {
 
   //If the postType is set to "ideas" it logs to the console...
 
-  switchPostType = (type) => {
-    if (type === "ideas") {
-      console.log(type);
+  switchPostType = (type, post) => {
+    let itemToMove = this.state.postList.find(item => item.id === post.id);
+    let index = this.state.postList.indexOf(itemToMove);
+    let temp = itemToMove.postType;
+    if (itemToMove.btn1Type === type) {
+      itemToMove.postType = itemToMove.btn1Type;
+      itemToMove.btn1Type = temp;
+    } else {
+      itemToMove.postType = itemToMove.btn2Type;
+      itemToMove.btn2Type = temp; 
     }
+
+    // the splice does not change the whole list so only one item is rendered. The second
+    // setState rectifies this problem.
+    this.setState({ postList : [...this.state.postList.splice(index, 1, itemToMove )] });
+    this.setState({ postList : [...this.state.postList] });
   }
 
   modifyPost = (item, route) => {
@@ -403,7 +402,6 @@ class JobTracker extends React.Component {
 
 
   filterPost = (type) => {
-    console.log("type is: " + type);
     let posts = this.state.postList.slice();
     posts.forEach( item => {
       if (item.postType !== type ) {
