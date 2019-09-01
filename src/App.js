@@ -12,9 +12,11 @@ import starIcon from './checkmark.svg';
 class Post extends React.Component {
 
 
-  address = (addr, city, zip) => {
-    if (addr) {
-      return <address>{addr + ", " + city + "  " + zip}</address>
+  address = (addr, cityState, zip) => {
+    let csString = cityState ? ", " + cityState : '';
+    let zipcode = zip ? "  " + zip : '';
+    if (addr || cityState || zip) {
+      return <address>{addr + csString + zipcode}</address>
     } else {
       return
     }
@@ -23,15 +25,15 @@ class Post extends React.Component {
 
   contact = (name, num) => {
     if (name) {
-      return <address>{name + " : " + num}</address>
+      return <address>{name + " : " } <a href={"skype:" + num}>{num}</a></address>
     } else {
-      return
+      return <address><a href={"skype:" + num}>{num}</a></address>
     }
   }
 
 
   interviewDate = (interViewDate, interViewTime, pStyle) => {
-    if (interViewDate) {
+    if (interViewDate !== "Invalid Date") {
       return <p style={pStyle}>Interview Date: {interViewDate + " " + interViewTime}</p>
     } else {
       return
@@ -39,7 +41,7 @@ class Post extends React.Component {
   }
 
   phoneCallDate = (callD, pStyle) => {
-    if (callD) {
+    if (callD !== "Invalid Date") {
       return <p style={pStyle}>Contacted: {callD}</p>
     } else {
       return
@@ -63,7 +65,7 @@ class Post extends React.Component {
   }
 
   positionDeadline = (deadline, pStyle) => {
-    if (deadline) {
+    if (deadline !== "Invalid Date") {
       return <p style={pStyle}>Deadline: {deadline}</p>
     } else {
       return
@@ -274,7 +276,7 @@ class JobTracker extends React.Component {
     //date is expected in the following format: 'Thu, 01 Jan 1970 00:00:00'
     this.state = {
       postList : [{
-        id       : Date.now(),
+        id       : Date.parse('Aug 18, 2019 13:15:30'),
         filter   : false,
         postType : "ideas",
         btn1Type : "applied",
@@ -291,9 +293,9 @@ class JobTracker extends React.Component {
         posUrl   : "google.com",
         salary   : "$100k",
         posDead  : 'Jan 31, 2020 23:15:30',
-        date     : 'Aug 18, 2019 13:15:30'
+        date     : Date.parse('Aug 18, 2019 13:15:30')
       },{
-        id       : Date.now() + 1,
+        id       : Date.parse('May 23, 2019 13:15:30'),
         filter   : false,
         postType : "applied",
         btn1Type : "contacted",
@@ -310,9 +312,9 @@ class JobTracker extends React.Component {
         posUrl   : "google.com",
         salary   : "$100k",
         posDead  : 'Dec 19, 2019 23:15:30',
-        date     : 'Aug 23, 2019 13:15:30'
+        date     : Date.parse('May 23, 2019 13:15:30')
       },{
-        id       : Date.now() + 2,
+        id       : Date.parse('Jan 23, 2018 13:15:30'),
         filter   : false,
         postType : "contacted",
         btn1Type : "ideas",
@@ -329,7 +331,7 @@ class JobTracker extends React.Component {
         posUrl   : "google.com",
         salary   : "$100k",
         posDead  : 'May 1, 2020 23:15:30',
-        date     : 'Aug 23, 2018 13:15:30'
+        date     : Date.parse('Jan 23, 2018 13:15:30')
       }
       ]
 
@@ -398,7 +400,7 @@ class JobTracker extends React.Component {
       date:     post.date
     }; 
 
-    // the splice does not change the whole list so only one item is rendered. The second
+    // the splice method returns the deleted item so only that item is rendered. The second
     // setState rectifies this problem.
     this.setState({ postList : [...this.state.postList.splice(index, 1, modifiedItem )] });
     this.setState({ postList : [...this.state.postList] });
@@ -443,6 +445,50 @@ class JobTracker extends React.Component {
 
   }
 
+
+  tSort = false;
+  typeSort = () => {
+    this.tSort = !this.tSort;
+    this.setState({
+      postList : [...this.state.postList].sort( (a, b) => {
+        let first = a;
+        let second = b;
+
+        if (!this.tSort) {
+          first = b;
+          second = a;
+        }
+        if (first.postType < second.postType) {
+          return -1;
+        }
+        if (first.postType > second.postType) {
+          return 1;
+        }
+        return 0;
+      })
+    })
+
+  }
+
+
+  dSort = false;
+  dateSort = () => {
+    this.dSort = !this.dSort;
+    this.setState({
+      postList : [...this.state.postList].sort( (a, b) => {
+        let first = a;
+        let second = b;
+
+        if (!this.dSort) {
+            first = b;
+            second = a;
+        }
+        return (first.date - second.date)
+      })
+    })
+
+  }
+
   render() {
 
     // storing the list in localStorage when it changes
@@ -476,6 +522,8 @@ class JobTracker extends React.Component {
       <h1 style={headerStyle}>Job Tracker</h1>
       <Link style={linkStyle} to="/">Home</Link>  
       <Link style={linkStyle} to="/form">Add Posting</Link>
+      <button onClick={()=>this.dateSort()}>Sort by Date</button>
+      <button onClick={()=>this.typeSort()}>Sort by Category</button>
       </header>
       <Route exact path="/" render={ props => (
         <React.Fragment>

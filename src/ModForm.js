@@ -66,7 +66,7 @@ class ModForm extends React.Component {
 		    		<label>Contact Number:</label><div><input type="text" name="phone" placeholder="Phone Number" value={this.state.phone} onChange={this.onChange} required/></div>
 		    		<label>Interview Date:</label><div><input type="datetime-local" name="interviewDate" placeholder="Interview Date" value={this.state.interviewDate} onChange={this.onChange} /></div>
 		    		<label>Called Date:</label><div><input type="date" name="phoneCallDate" placeholder="Phone Call Date" value={this.state.phoneCallDate} onChange={this.onChange} /></div>
-		    		<label>Position:</label><div><input type="text" name="position" placeholder="Desired Position" value={this.state.position} onChange={this.onChange} /></div>
+		    		<label>Position:</label><div><input type="text" name="position" placeholder="Desired Position" value={this.state.position} onChange={this.onChange} required/></div>
 		    		<label>Website:</label><div><input type="text" name="website" placeholder="Website URL" value={this.state.website} onChange={this.onChange}/></div>
 		    		<label>Salary:</label><div><input type="text" name="salary" placeholder="Salary" value={this.state.salary} onChange={this.onChange} /></div>
 		    		<label>Job Posting Deadline:</label><div><input type="date" name="deadline" placeholder="Deadline" value={this.state.deadline} onChange={this.onChange} /></div>
