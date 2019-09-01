@@ -136,7 +136,11 @@ class Post extends React.Component {
 
      
      const btn1Style = {
-      background : "#000",
+      backgroundColor: "Transparent",
+      backgroundRepeat:"no-repeat",
+      border: "none",
+      overflow: "hidden",
+      outline:"none",
       color : "#fff",
       borderRadius : "20px",
       cursor : "pointer",
@@ -147,7 +151,11 @@ class Post extends React.Component {
     };
 
     const btn2Style = {
-      background : "#000",
+      backgroundColor: "Transparent",
+      backgroundRepeat:"no-repeat",
+      border: "none",
+      overflow: "hidden",
+      outline:"none",
       borderRadius : "20px",
       cursor : "pointer",
       float  : "left",
@@ -155,7 +163,11 @@ class Post extends React.Component {
     };
 
     const btn3Style = {
-      background : "#000",
+      backgroundColor: "Transparent",
+      backgroundRepeat:"no-repeat",
+      border: "none",
+      overflow: "hidden",
+      outline:"none",
       borderRadius : "20px",
       cursor : "pointer",
       float  : "left",
@@ -165,12 +177,16 @@ class Post extends React.Component {
     };
 
     const btn4Style = {
-      background : "#000",
+      backgroundColor: "Transparent",
+      backgroundRepeat:"no-repeat",
+      border: "none",
+      overflow: "hidden",
+      outline:"none",
       borderRadius : "20px",
       cursor : "pointer",
       float  : "right",
       padding : "4px 5px",
-      marginTop: "80px",
+      marginTop: "60px",
       marginLeft: "3px",
       marginRight: "2px"
     };
@@ -182,11 +198,11 @@ class Post extends React.Component {
 	    return (
         <div>
 	      <li className={ filter ? "nopost" : "post"} style={this.listStyle()}>
-          <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}><img src={edit} alt={"Modify Post"} style={{width: "14px", height: "14px"}} title={"Modify Post"}/></button>
+          <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}><img src={edit} alt={"Modify Post"} style={{width: "22px", height: "22px"}} title={"Modify Post"}/></button>
           <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
-          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.getIcon(postType)} alt={"Filter Button"} style={{width: "14px", height: "14px"}}/></button>
-          <button onClick={this.props.switchPostType.bind(this, btn1Type, this.props.p)} style={btn4Style} ><img src={this.getIcon(btn1Type)} alt={"Move Button"} style={{width: "14px", height: "14px"}}/></button>
-          <button onClick={this.props.switchPostType.bind(this, btn2Type, this.props.p)} style={btn4Style} ><img src={this.getIcon(btn2Type)} alt={"Move Button"} style={{width: "14px", height: "14px"}}/></button>
+          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.getIcon(postType)} alt={"Filter Button"} style={{width: "22px", height: "22px"}}/></button>
+          <button onClick={this.props.switchPostType.bind(this, btn1Type, this.props.p)} style={btn4Style} ><img src={this.getIcon(btn1Type)} alt={"Move Button"} style={{width: "22px", height: "22px"}}/></button>
+          <button onClick={this.props.switchPostType.bind(this, btn2Type, this.props.p)} style={btn4Style} ><img src={this.getIcon(btn2Type)} alt={"Move Button"} style={{width: "22px", height: "22px"}}/></button>
              
          
           <details>
@@ -196,7 +212,7 @@ class Post extends React.Component {
           {this.interviewDate(iDate.toDateString(), this.getTimeString(iDate), pStyle)}
           {this.phoneCallDate(pDate.toDateString(), pStyle)}
           </details>
-          <hr width="10%"/>
+  
           <details>
           <summary style={{outline: "none"}}>{posTitle}</summary>
           {this.positionUrl(posUrl)}
