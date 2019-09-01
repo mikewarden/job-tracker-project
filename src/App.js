@@ -207,10 +207,12 @@ class Post extends React.Component {
          
           <details>
           <summary style={{outline: "none"}}>{compName}</summary>
+          
           {this.address(compSA, compCS, compZip)}
           {this.contact(cName, cNumber)}
           {this.interviewDate(iDate.toDateString(), this.getTimeString(iDate), pStyle)}
           {this.phoneCallDate(pDate.toDateString(), pStyle)}
+         
           </details>
   
           <details>
