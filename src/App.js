@@ -107,7 +107,8 @@ class Post extends React.Component {
   getTimeString = (date) => {
     let hh = date.getHours();
     let mm = date.getMinutes();
-    let tz = date.toTimeString().match(new RegExp("[A-Z](?!.*[\(])","g")).join('');
+    let regex = new RegExp("[A-Z](?!.*[(])",'g');
+    let tz = date.toTimeString().match(regex).join('');
 
     let tod = "AM";
     if (hh > 12) { 
@@ -126,13 +127,17 @@ class Post extends React.Component {
      cNumber, cName, invwDate, pcDate, posTitle, posUrl, 
      salary, posDead, date} = this.props.p;
 
+     let iDate = new Date(invwDate);
+     let pDate = new Date(pcDate);
+     let dDate = new Date(posDead);
+     let aDate = new Date(date);
+
      const pStyle = { margin: "0px", outline: "none", marginBlockStart: 0, marginBlockEnd: 0};
 
      
      const btn1Style = {
       background : "#000",
       color : "#fff",
-      padding : "5px",
       borderRadius : "20px",
       cursor : "pointer",
       float  : "right",
@@ -143,7 +148,6 @@ class Post extends React.Component {
 
     const btn2Style = {
       background : "#000",
-      padding : "5px",
       borderRadius : "20px",
       cursor : "pointer",
       float  : "left",
@@ -152,7 +156,6 @@ class Post extends React.Component {
 
     const btn3Style = {
       background : "#000",
-      padding : "5px",
       borderRadius : "20px",
       cursor : "pointer",
       float  : "left",
@@ -163,7 +166,6 @@ class Post extends React.Component {
 
     const btn4Style = {
       background : "#000",
-      padding : "5px",
       borderRadius : "20px",
       cursor : "pointer",
       float  : "right",
@@ -180,28 +182,28 @@ class Post extends React.Component {
 	    return (
         <div>
 	      <li className={ filter ? "nopost" : "post"} style={this.listStyle()}>
-          <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}><img src={edit} style={{width: "14px", height: "14px"}} title={"Modify Post"}/></button>
+          <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}><img src={edit} alt={"Modify Post"} style={{width: "14px", height: "14px"}} title={"Modify Post"}/></button>
           <button onClick={this.props.deletePost.bind(this, id)} style={btn1Style}>X</button>
-          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.getIcon(postType)} style={{width: "14px", height: "14px"}}/></button>
-          <button onClick={this.props.switchPostType.bind(this, btn1Type, this.props.p)} style={btn4Style} ><img src={this.getIcon(btn1Type)} style={{width: "14px", height: "14px"}}/></button>
-          <button onClick={this.props.switchPostType.bind(this, btn2Type, this.props.p)} style={btn4Style} ><img src={this.getIcon(btn2Type)} style={{width: "14px", height: "14px"}}/></button>
+          <button onClick={this.props.filterPost.bind(this, postType)} style={btn2Style}><img className="filterBtn" src={this.getIcon(postType)} alt={"Filter Button"} style={{width: "14px", height: "14px"}}/></button>
+          <button onClick={this.props.switchPostType.bind(this, btn1Type, this.props.p)} style={btn4Style} ><img src={this.getIcon(btn1Type)} alt={"Move Button"} style={{width: "14px", height: "14px"}}/></button>
+          <button onClick={this.props.switchPostType.bind(this, btn2Type, this.props.p)} style={btn4Style} ><img src={this.getIcon(btn2Type)} alt={"Move Button"} style={{width: "14px", height: "14px"}}/></button>
              
          
           <details>
           <summary style={{outline: "none"}}>{compName}</summary>
           {this.address(compSA, compCS, compZip)}
           {this.contact(cName, cNumber)}
-          {this.interviewDate(invwDate.toDateString(), this.getTimeString(invwDate), pStyle)}
-          {this.phoneCallDate(pcDate.toDateString(), pStyle)}
+          {this.interviewDate(iDate.toDateString(), this.getTimeString(iDate), pStyle)}
+          {this.phoneCallDate(pDate.toDateString(), pStyle)}
           </details>
           <hr width="10%"/>
           <details>
           <summary style={{outline: "none"}}>{posTitle}</summary>
           {this.positionUrl(posUrl)}
           {this.positionSalary(salary, pStyle)}
-          {this.positionDeadline(posDead.toDateString(), pStyle)}
+          {this.positionDeadline(dDate.toDateString(), pStyle)}
           </details>
-          <p>{this.getDateDifference(date)}</p>
+          <p>{this.getDateDifference(aDate)}</p>
           </li>
           </div>
           );
@@ -212,18 +214,18 @@ class Post extends React.Component {
 class Postings extends React.Component {
 
   render() {
-   return ( 
-    this.props.posts.map( item => (
+    return ( 
+      this.props.posts.map( item => (
 
-     <Post key={item.id} p={item} deletePost={this.props.deletePost} 
-     filterPost={this.props.filterPost} 
-     modifyPost={this.props.modifyPost}
-     switchPostType={this.props.switchPostType}
-     routeInfo={this.props.routeInfo}/>
-
-     ) )
+        <Post key={item.id} p={item} deletePost={this.props.deletePost} 
+                                     filterPost={this.props.filterPost} 
+                                     modifyPost={this.props.modifyPost}
+                                     switchPostType={this.props.switchPostType}
+                                     routeInfo={this.props.routeInfo}/>
+      ) )
     )
- }
+  }
+
 }
 
 
@@ -238,10 +240,23 @@ class JobTracker extends React.Component {
   constructor(props) {
   	super(props);
 
-    // date is expected in the following format: 'Thu, 01 Jan 1970 00:00:00'
+    // getting data out of localStorage for display
+    let size = JSON.parse(localStorage.getItem("listSize"));
+
+    let postList = [];
+    if (size > 0) {
+      for (let i=0; i<size; i++) {
+        postList.push(JSON.parse(localStorage.getItem(`post${i}`)));
+      }
+      this.state = { postList };
+      console.log("USING LOCAL STORAGE");
+
+    } else {
+
+    //date is expected in the following format: 'Thu, 01 Jan 1970 00:00:00'
     this.state = {
       postList : [{
-        id       : new Date(),
+        id       : Date.now(),
         filter   : false,
         postType : "ideas",
         btn1Type : "applied",
@@ -252,15 +267,15 @@ class JobTracker extends React.Component {
         compZip  : 75229,
         cNumber  : "480-294-0824",
         cName    : "Melissa Stines",
-        invwDate : new Date("12/12/2019 23:15:30"),
-        pcDate   : new Date("01/13/2020"),
+        invwDate : "12/12/2019 23:15:30",
+        pcDate   : "01/13/2020",
         posTitle : "Position Title Here",
         posUrl   : "google.com",
         salary   : "$100k",
-        posDead  : new Date('Jan 31, 2020 23:15:30'),
-        date     : new Date('Aug 18, 2019 13:15:30')
+        posDead  : 'Jan 31, 2020 23:15:30',
+        date     : 'Aug 18, 2019 13:15:30'
       },{
-        id       : new Date() + 1,
+        id       : Date.now() + 1,
         filter   : false,
         postType : "applied",
         btn1Type : "contacted",
@@ -271,15 +286,15 @@ class JobTracker extends React.Component {
         compZip  : 75229,
         cNumber  : "480-294-0824",
         cName    : "Melissa Stines",
-        invwDate : new Date("12/12/2019"),
-        pcDate   : new Date("01/13/2020"),
+        invwDate : "12/12/2019",
+        pcDate   : "01/13/2020",
         posTitle : "Position Title Here",
         posUrl   : "google.com",
         salary   : "$100k",
-        posDead  : new Date('Dec 19, 2019 23:15:30'),
-        date     : new Date('Aug 23, 2019 13:15:30')
+        posDead  : 'Dec 19, 2019 23:15:30',
+        date     : 'Aug 23, 2019 13:15:30'
       },{
-        id       : new Date() + 2,
+        id       : Date.now() + 2,
         filter   : false,
         postType : "contacted",
         btn1Type : "ideas",
@@ -290,18 +305,20 @@ class JobTracker extends React.Component {
         compZip  : 75229,
         cNumber  : "480-294-0824",
         cName    : "Melissa Stines",
-        invwDate : new Date("12/12/2019"),
-        pcDate   : new Date("01/13/2020"),
+        invwDate : "12/12/2019",
+        pcDate   : "01/13/2020",
         posTitle : "Position Title Here",
         posUrl   : "google.com",
         salary   : "$100k",
-        posDead  : new Date('May 1, 2020 23:15:30'),
-        date     : new Date('Aug 23, 2018 13:15:30')
+        posDead  : 'May 1, 2020 23:15:30',
+        date     : 'Aug 23, 2018 13:15:30'
       }
       ]
 
     }
+    console.log("NOT USING LOCAL STORAGE");
   }
+}
 
 
   deletePost = (id) => {
@@ -312,7 +329,7 @@ class JobTracker extends React.Component {
 
 
   addPost = (post) => {
-    let now = new Date();
+    let now = Date.now();
     const newPost = {
       id: now, 
       filter: false,
@@ -325,12 +342,12 @@ class JobTracker extends React.Component {
       compZip: post.zipCode,
       cNumber: post.phone,
       cName: post.contactName,
-      invwDate: new Date(post.interviewDate),
-      pcDate:  new Date(post.phoneCallDate),
+      invwDate: post.interviewDate,
+      pcDate:  post.phoneCallDate,
       posTitle: post.position,
       posUrl: post.website,
       salary: post.salary,
-      posDead: new Date(post.deadline),
+      posDead: post.deadline,
       date: now
     }
     this.setState({
@@ -354,12 +371,12 @@ class JobTracker extends React.Component {
       compZip:  post.zipCode,
       cNumber:  post.phone,
       cName:    post.contactName,
-      invwDate: new Date(post.interviewDate),
-      pcDate:   new Date(post.phoneCallDate),
+      invwDate: post.interviewDate,
+      pcDate:   post.phoneCallDate,
       posTitle: post.position,
       posUrl:   post.website,
       salary:   post.salary,
-      posDead:  new Date(post.deadline),
+      posDead:  post.deadline,
       date:     post.date
     }; 
 
@@ -409,6 +426,18 @@ class JobTracker extends React.Component {
   }
 
   render() {
+
+    // storing the list in localStorage when it changes
+    let list = this.state.postList.map(item => {
+      return JSON.stringify(item);
+    });
+    localStorage.setItem("listSize", JSON.stringify(this.state.postList.length));
+
+    list.forEach(( item, index) => {
+      localStorage.setItem(`post${index}`, item);
+    });
+    
+    // setting some style variables
     const linkStyle = {
       margin : "0 2% 0 2%",
       textDecoration: "none",
@@ -434,10 +463,10 @@ class JobTracker extends React.Component {
         <React.Fragment>
         <ul className="Postings">
         <Postings posts={this.state.postList} deletePost={this.deletePost}
-        filterPost={this.filterPost}
-        modifyPost={this.modifyPost}
-        switchPostType={this.switchPostType}
-        routeInfo={props}/>
+                                              filterPost={this.filterPost}
+                                              modifyPost={this.modifyPost}
+                                              switchPostType={this.switchPostType}
+                                              routeInfo={props}/>
         </ul>
         </React.Fragment>
         )} />
