@@ -73,6 +73,12 @@
   }
 }
 
+@media (min-width: 600px) {
+  .Form {
+    border-style: none;
+  }
+}
+
 
 h1 {
   text-align: center;
