@@ -80,9 +80,13 @@ class Post extends React.Component {
     } else if (this.props.p.postType === "applied") {
       return { backgroundColor : "#9FEDD7", color: "#000"  };
 
-    } else if (this.props.p.postType === "contacted")
-      return { backgroundColor : "#FCE181", color: "#000"  };
+    } else if (this.props.p.postType === "contacted") {
+      return { backgroundColor : "#FCE170", color: "#000"  };
+    } else {
+      return { backgroundColor : "#FEF9C7", color: "#000" };
     }
+    
+  }
 
   getIcon = (iconType) => {
     if (iconType === "ideas") {
@@ -262,7 +266,7 @@ class JobTracker extends React.Component {
 
     // getting data out of localStorage for display
     let size = JSON.parse(localStorage.getItem("listSize"));
-
+    console.log(size);
     let postList = [];
     if (size > 0) {
       for (let i=0; i<size; i++) {
@@ -522,8 +526,10 @@ class JobTracker extends React.Component {
       <h1 style={headerStyle}>Job Tracker</h1>
       <Link style={linkStyle} to="/">Home</Link>  
       <Link style={linkStyle} to="/form">Add Posting</Link>
-      <button onClick={()=>this.dateSort()}>Sort by Date</button>
-      <button onClick={()=>this.typeSort()}>Sort by Category</button>
+      <button onClick={()=>this.dateSort()} style ={{ backgroundColor: "Transparent",
+      backgroundRepeat:"no-repeat", color: "#fff", border: "none", outline: "none", fontSize: "16px", cursor: "pointer"}}>Sort by Date</button>
+      <button onClick={()=>this.typeSort()} style ={{ backgroundColor: "Transparent",
+      backgroundRepeat:"no-repeat", color: "#fff", border: "none", outline: "none", fontSize: "16px"}}>Sort by Category</button>
       </header>
       <Route exact path="/" render={ props => (
         <React.Fragment>

@@ -9,6 +9,8 @@ class ModForm extends React.Component {
 			id           : posting.id,
 			filter       : posting.filter,
 			postType     : posting.postType,
+			btn1Type     : posting.btn1Type,
+			btn2Type     : posting.btn2Type,
 			company      : posting.compName,
 			street       : posting.compSA,
 			cityState    : posting.compCS,
