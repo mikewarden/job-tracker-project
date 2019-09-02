@@ -3,8 +3,8 @@
 	list-style-type : none;
     border: bisque 8px;
     /*border: 2px solid #FFF3D9;*/
-    border-radius: 9vw;
-    text-align: center;
+    border-radius: 5vw;
+    text-align: left;
     margin-bottom: 8px;
     margin-right: 40px;
     opacity: 0.78;
@@ -48,7 +48,7 @@
 .submit-btn {
   border-radius: 20px;
   margin: 20px 0px 20px 0px;
-  background-color: #FCE181;
+  background-color: #626E60;
   width: 100px;
 }
 
@@ -59,7 +59,7 @@
   margin: 15px 100px;
   padding-top: 20px;
   padding-bottom: 5px;
-  background-color: #9FEDD7;
+  background-color: #3C3C3C;
  /* opacity: 0.6;*/
   color: #000#FEF9C7;
 }
@@ -80,10 +80,10 @@ h1 {
 input {
   width: 70%;
   border-radius: 30px;
-  border: 3px solid #026670;
-  background-color: #FEF9C7;
+  border: 3px solid #3C3C3C;
+  background-color: #626E60;
   opacity: 0.95;
-  color: #000;
+  color: #fff;
   padding: 6px;
   margin-bottom: 7px;
 }
@@ -105,15 +105,22 @@ label {
   width: 300px;  /* this needs to be in a media query */
   padding: 5px;
   float: left;
+  color: #fff;
 } 
 
 body {
   /*background-image: linear-gradient(to right, #7700FF , #0CAFE8);*/
-  background-color: #026670;
+  background-color: #3C3C3C;
+  font-family: sans-serif;
+  font-style: normal;
 }
 
 ul {
   text-align: center;
+}
+
+h3 {
+  color: #fff;
 }
 
 ::placeholder {
@@ -123,3 +130,27 @@ ul {
 .no-italics {
     font-style: normal;   
 }
+
+summary::-webkit-details-marker {
+  display: none
+}
+summary:after {
+  background: transparent; 
+  border-radius: 5px; 
+  content: "+"; 
+  color: #fff; 
+  float: left; 
+  font-size: 1.5em; 
+  font-weight: bold; 
+  margin: -5px 10px 0 0; 
+  padding: 0; 
+  text-align: center; 
+  width: 20px;
+}
+details[open] summary:after {
+  content: "-";
+}
+
+
+
+

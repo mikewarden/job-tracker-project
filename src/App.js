@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.css';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import Form from './Form.js';
@@ -75,15 +76,15 @@ class Post extends React.Component {
   // dynamic style!
   listStyle = () => {
     if (this.props.p.postType === "ideas") {
-      return { backgroundColor : "#FEF9C7", color: "#000" };
+      return { backgroundColor : "#626E60", color: "#fff" };
 
     } else if (this.props.p.postType === "applied") {
-      return { backgroundColor : "#9FEDD7", color: "#000"  };
+      return { backgroundColor : "#945D60", color: "#fff"  };
 
     } else if (this.props.p.postType === "contacted") {
-      return { backgroundColor : "#FCE170", color: "#000"  };
+      return { backgroundColor : "#AF473C", color: "#fff"  };
     } else {
-      return { backgroundColor : "#FEF9C7", color: "#000" };
+      return { backgroundColor : "#626E60", color: "#fff" };
     }
     
   }
@@ -147,7 +148,7 @@ class Post extends React.Component {
       border: "none",
       overflow: "hidden",
       outline:"none",
-      color : "#000",
+      color : "#fff",
       borderRadius : "20px",
       cursor : "pointer",
       float  : "right",
@@ -211,8 +212,8 @@ class Post extends React.Component {
           <button onClick={this.props.switchPostType.bind(this, btn2Type, this.props.p)} style={btn4Style}  title={"Change Post Type"} ><img src={this.getIcon(btn2Type)} alt={"Move Button"} style={{width: "25px", height: "25px"}}/></button>
              
          
-          <details>
-          <summary style={{outline: "none"}}>{compName}</summary>
+          <details  style={{ marginLeft: "20px", outline: "none", textAlign: "left"}}>
+          <summary style={{marginLeft: "10px", outline: "none", textAlign: "left"}}>{compName}</summary>
           
           {this.address(compSA, compCS, compZip)}
           {this.contact(cName, cNumber)}
@@ -221,8 +222,8 @@ class Post extends React.Component {
          
           </details>
   
-          <details>
-          <summary style={{outline: "none"}}>{posTitle}</summary>
+          <details  style={{marginLeft: "20px", outline: "none", textAlign: "left"}}>
+          <summary style={{marginLeft: "10px", outline: "none", textAlign: "left"}}>{posTitle}</summary>
           {this.positionUrl(posUrl)}
           {this.positionSalary(salary, pStyle)}
           {this.positionDeadline(dDate.toDateString(), pStyle)}
@@ -529,7 +530,7 @@ class JobTracker extends React.Component {
       <button onClick={()=>this.dateSort()} style ={{ backgroundColor: "Transparent",
       backgroundRepeat:"no-repeat", color: "#fff", border: "none", outline: "none", fontSize: "16px", cursor: "pointer"}}>Sort by Date</button>
       <button onClick={()=>this.typeSort()} style ={{ backgroundColor: "Transparent",
-      backgroundRepeat:"no-repeat", color: "#fff", border: "none", outline: "none", fontSize: "16px"}}>Sort by Category</button>
+      backgroundRepeat:"no-repeat", color: "#fff", border: "none", outline: "none", fontSize: "16px", cursor: "pointer"}}>Sort by Category</button>
       </header>
       <Route exact path="/" render={ props => (
         <React.Fragment>
