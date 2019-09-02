@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '../styles/index.css';
-import '../styles/App.css';
+import '../styles/JobTracker.css';
 import edit from '../images/pencil.svg';
 import lightbulbIcon from '../images/lightbulb.svg';
 import phoneIcon from '../images/phone.svg';
