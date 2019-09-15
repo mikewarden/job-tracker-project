@@ -20,6 +20,21 @@ class Post extends React.Component {
     }
   }
 
+  // dragulaDecorator = (componentBackingInstance) => {
+  //   if (componentBackingInstance) {
+  //     let options = {
+  //       mirrorContainer: document.body,
+  //       drag: true,
+  //       direction: 'vertical',
+  //       drop: true,
+  //       copy: true,
+  //       copySortSource: true,
+  //       removeOnSpill: true
+  //     };
+  //     Dragula([componentBackingInstance], options)
+  //   }
+  // };
+
 
   contact = (name, num) => {
     if (name) {
@@ -185,6 +200,7 @@ class Post extends React.Component {
 
 
 	    return (
+        
         <div>
 	      <li className={ filter ? "nopost" : "post"} style={this.listStyle()}>
           <button onClick={this.props.modifyPost.bind(this, this.props.p, route)} style={btn3Style}><img src={edit} alt={"Modify Post"} style={{width: "25px", height: "25px"}} title={"Modify Post"}/></button>
@@ -213,6 +229,7 @@ class Post extends React.Component {
           <p>{this.getDateDifference(aDate)}</p>
           </li>
           </div>
+          
           );
   }
 }

@@ -1,11 +1,11 @@
 import React from 'react';
+import Dragula from 'react-dragula';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {Link} from 'react-router-dom';
-
 import Form from './Form.js';
 import ModForm from './ModForm.js';
 import Postings from './Postings.js';
-
+import '../styles/JobTracker.css';
 
 // Keeps track of all job postings the 
 // client is interested in (ideas), has
@@ -160,6 +160,18 @@ class JobTracker extends React.Component {
     this.setState({ postList : [...this.state.postList] });
   }
 
+   dragulaDecorator = (componentBackingInstance) => {
+    if (componentBackingInstance) {
+      let options = {
+        revertOnSpill: false, 
+        removeOnSpill: false,
+        copy: false,
+        copySortSource: false 
+      };
+      Dragula([componentBackingInstance], options)
+    }
+  };
+
 
   //If the postType is set to "ideas" it logs to the console...
 
@@ -283,12 +295,15 @@ class JobTracker extends React.Component {
       </header>
       <Route exact path="/" render={ props => (
         <React.Fragment>
+
         <ul className="Postings">
+        <div className='container' ref={this.dragulaDecorator}>
         <Postings posts={this.state.postList} deletePost={this.deletePost}
                                               filterPost={this.filterPost}
                                               modifyPost={this.modifyPost}
                                               switchPostType={this.switchPostType}
                                               routeInfo={props}/>
+                                              </div>
         </ul>
         </React.Fragment>
         )} />

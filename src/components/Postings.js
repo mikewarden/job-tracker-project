@@ -4,6 +4,7 @@ import Post from './Post';
 
 class Postings extends React.Component {
 
+
   render() {
     return ( 
       this.props.posts.map( item => (
